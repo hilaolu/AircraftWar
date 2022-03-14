@@ -25,11 +25,11 @@ class HeroAircraft(
 
     /** 子弹一次发射数量
       */
-    private val shootNum: Int = 1
+    private var shootNum: Int = 1
 
     /** 子弹伤害
       */
-    private val power: Int = 30
+    private var power: Int = 30
 
     /** 子弹射击方向 (向上发射：1，向下发射：-1)
       */
