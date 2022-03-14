@@ -1,4 +1,7 @@
 # IDEA dir
+.bloop/**
+.metals/**
+.vscode/**
 .idea/*
 out/*
 
