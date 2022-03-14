@@ -81,9 +81,9 @@ public class Game extends JPanel {
 				System.out.println(time);
 				// 新敌机产生
 				if (enemyAircrafts.size() < enemyMaxNumber) {
-					enemyAircrafts.add(
-							new MobEnemy((int) (Math.random() * (512 - ImageManager.MOB_ENEMY_IMAGE.getWidth())) * 1,
-									(int) (Math.random() * 768 * 0.2) * 1, 0, 10, 30));
+					enemyAircrafts.add(new EnemyAircraft(
+							(int) (Math.random() * (512 - ImageManager.MOB_ENEMY_IMAGE.getWidth())) * 1,
+							(int) (Math.random() * 768 * 0.2) * 1, 0, 10, 30));
 				}
 				// 飞机射出子弹
 				shootAction();
@@ -138,6 +138,9 @@ public class Game extends JPanel {
 
 	private void shootAction() {
 		// TODO 敌机射击
+		for (AbstractAircraft enemyAircraft : enemyAircrafts) {
+			enemyBullets.addAll(enemyAircraft.shoot());
+		}
 
 		// 英雄射击
 		heroBullets.addAll(heroAircraft.shoot());

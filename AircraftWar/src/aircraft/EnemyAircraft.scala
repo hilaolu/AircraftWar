@@ -8,19 +8,24 @@ import java.util.LinkedList
 import java.util.List
 
 import scala.jdk.CollectionConverters._
+import bullet.EnemyBullet
 
 /** 普通敌机 不可射击
   *
   * @author
   *   hitsz
   */
-class MobEnemy(
+class EnemyAircraft(
     locationX: Int,
     locationY: Int,
     speedX: Int,
     speedY: Int,
     hp: Int
 ) extends AbstractAircraft(locationX, locationY, speedX, speedY, hp) {
+
+    private var bullet_power = 1
+
+    private val direction: Int = -1
 
     override def forward() = {
         super.forward();
@@ -31,7 +36,16 @@ class MobEnemy(
     }
 
     def shoot: List[AbstractBullet] = {
-        new LinkedList()
+        var res: List[AbstractBullet] = new LinkedList()
+        var abstractBullet = new EnemyBullet(
+          locationX,
+          locationY + 2,
+          0,
+          speedY + direction * 5,
+          bullet_power
+        )
+        res.add(abstractBullet)
+        res
     }
 
 }

@@ -1,7 +1,7 @@
 package application;
 
 import aircraft.HeroAircraft;
-import aircraft.MobEnemy;
+import aircraft.EnemyAircraft;
 import bullet.EnemyBullet;
 import bullet.HeroBullet;
 
@@ -42,7 +42,7 @@ public class ImageManager {
 			ENEMY_BULLET_IMAGE = ImageIO.read(new FileInputStream("AircraftWar/src/images/bullet_enemy.png"));
 
 			CLASSNAME_IMAGE_MAP.put(HeroAircraft.class.getName(), HERO_IMAGE);
-			CLASSNAME_IMAGE_MAP.put(MobEnemy.class.getName(), MOB_ENEMY_IMAGE);
+			CLASSNAME_IMAGE_MAP.put(EnemyAircraft.class.getName(), MOB_ENEMY_IMAGE);
 			CLASSNAME_IMAGE_MAP.put(HeroBullet.class.getName(), HERO_BULLET_IMAGE);
 			CLASSNAME_IMAGE_MAP.put(EnemyBullet.class.getName(), ENEMY_BULLET_IMAGE);
 
