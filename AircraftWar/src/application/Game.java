@@ -62,7 +62,7 @@ public class Game extends JPanel {
 				new BasicThreadFactory.Builder().namingPattern("game-action-%d").daemon(true).build());
 
 		// 启动英雄机鼠标监听
-		new HeroController(this, heroAircraft);
+		HeroController.apply(this, heroAircraft);
 
 	}
 
