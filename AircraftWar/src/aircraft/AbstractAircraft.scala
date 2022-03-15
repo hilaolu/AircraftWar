@@ -31,6 +31,11 @@ abstract class AbstractAircraft(
         }
     }
 
+    def increaseHp(increase: Int) = {
+        hp += increase
+        hp = if (hp < maxHp) hp else maxHp
+    }
+
     def getHp(): Int = hp
 
     /** 飞机射击方法，可射击对象必须实现
