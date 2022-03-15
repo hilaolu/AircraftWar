@@ -92,7 +92,7 @@ class Game extends JPanel {
                                 .random() * Main.WINDOW_HEIGHT * 0.2).toInt * 1,
                             0,
                             5,
-                            30
+                            10
                           )
                         )
                     }
@@ -108,7 +108,7 @@ class Game extends JPanel {
                                 .random() * Main.WINDOW_HEIGHT * 0.2).toInt * 1,
                             0,
                             3,
-                            60
+                            20
                           )
                         )
                     }
