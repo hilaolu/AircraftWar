@@ -36,25 +36,13 @@ class HeroAircraft(
         // 英雄机由鼠标控制，不通过forward函数移动
     }
 
-    override def shoot(): ListBuffer[AbstractBullet] = {
-        var res: ListBuffer[AbstractBullet] = new ListBuffer()
-        var x: Int = this.getLocationX()
-        var y: Int = this.getLocationY() + direction * 2
-        var speedX: Int = 0
-        var speedY: Int = this.getSpeedY() + direction * 5
-        for (i <- 0 until shootNum) {
-            // 子弹发射位置相对飞机位置向前偏移
-            // 多个子弹横向分散
-            var abstractBullet = new HeroBullet(
-              x + (i * 2 - shootNum + 1) * 10,
-              y,
-              speedX,
-              speedY,
-              power
-            )
-            res.addOne(abstractBullet)
-        }
-        res
+    override def shoot() = {
+        weapon.MachineGun(
+          () => new HeroBullet(1),
+          getLocationX(),
+          getLocationY(),
+          direction,
+          shootNum = 2
+        )
     }
-
 }

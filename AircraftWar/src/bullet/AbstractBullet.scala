@@ -28,6 +28,29 @@ abstract class AbstractBullet(
         this.power = power
     }
 
+    def this(
+        power: Int
+    ) = {
+        this(0, 0, 0, 0)
+        this.power = power
+    }
+
+    def setX(x: Int) = {
+        locationX = x
+    }
+
+    def setY(y: Int) = {
+        locationY = y
+    }
+
+    def setVX(vx: Int) = {
+        speedX = vx
+    }
+
+    def setVY(vy: Int) = {
+        speedY = vy
+    }
+
     override def forward() = {
         super.forward()
 

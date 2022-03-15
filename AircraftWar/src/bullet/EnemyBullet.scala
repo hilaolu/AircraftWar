@@ -9,4 +9,8 @@ class EnemyBullet(
     _speedX: Int,
     _speedY: Int,
     _power: Int
-) extends AbstractBullet(_locationX, _locationY, _speedX, _speedY, _power) {}
+) extends AbstractBullet(_locationX, _locationY, _speedX, _speedY, _power) {
+    def this(power: Int) = {
+        this(0, 0, 0, 0, power)
+    }
+}

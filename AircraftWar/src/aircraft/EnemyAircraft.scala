@@ -32,17 +32,13 @@ class EnemyAircraft(
         }
     }
 
-    def shoot(): ListBuffer[AbstractBullet] = {
-        var res: ListBuffer[AbstractBullet] = new ListBuffer()
-        var abstractBullet = new EnemyBullet(
-          locationX,
-          locationY + 2,
-          0,
-          speedY + direction * 5,
-          bullet_power
+    def shoot() = {
+        weapon.MachineGun(
+          () => new EnemyBullet(1),
+          getLocationX(),
+          getLocationY(),
+          direction,
+          7
         )
-        res.addOne(abstractBullet)
-        res
     }
-
 }
