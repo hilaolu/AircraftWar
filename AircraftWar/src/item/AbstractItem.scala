@@ -23,4 +23,6 @@ abstract class AbstractItem(
         }
     }
 
+    def effect()
+
 }

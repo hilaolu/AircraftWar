@@ -13,4 +13,9 @@ class BloodItem(
     _locationY: Int,
     _speedX: Int,
     _speedY: Int
-) extends AbstractItem(_locationX, _locationY, _speedX, _speedY) {}
+) extends AbstractItem(_locationX, _locationY, _speedX, _speedY) {
+
+    def effect() = {
+        println("[Blood Item Applied]")
+    }
+}

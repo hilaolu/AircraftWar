@@ -116,7 +116,7 @@ class Game extends JPanel {
                                 .random() * Main.WINDOW_HEIGHT * 0.2).toInt * 1,
                             0,
                             3,
-                            2
+                            20
                           )
                         )
                     }
@@ -249,6 +249,14 @@ class Game extends JPanel {
         }
 
         // Todo: 我方获得道具，道具生效
+        for (item <- items) {
+            if (item.isValid) {
+                if (heroAircraft.crash(item)) {
+                    item.effect()
+                    item.vanish()
+                }
+            }
+        }
 
     }
 
@@ -258,6 +266,7 @@ class Game extends JPanel {
         enemyBullets = enemyBullets.filter(_.isValid)
         heroBullets = heroBullets.filter(_.isValid)
         enemyAircrafts = enemyAircrafts.filter(_.isValid)
+        items = items.filter(_.isValid)
     }
 
     // ***********************
