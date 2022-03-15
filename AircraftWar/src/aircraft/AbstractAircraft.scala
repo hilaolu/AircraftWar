@@ -1,12 +1,9 @@
 package aircraft;
 
-import bullet.AbstractBullet;
-import basic.AbstractFlyingObject;
-
-import java.util.List;
-import scala.jdk.CollectionConverters._
-
 import scala.collection.mutable.ListBuffer
+
+import basic.AbstractFlyingObject
+import bullet.AbstractBullet
 
 /** 所有种类飞机的抽象父类： 敌机（BOSS, ELITE, MOB），英雄飞机
   *

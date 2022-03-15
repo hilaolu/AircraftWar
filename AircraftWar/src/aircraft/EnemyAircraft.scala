@@ -1,15 +1,13 @@
 package aircraft
 
+import java.util.LinkedList
+
+import scala.collection.mutable.ListBuffer
+
 import application.Game
 import application.Main
 import bullet.AbstractBullet
-
-import java.util.LinkedList
-import java.util.List
-
-import scala.jdk.CollectionConverters._
 import bullet.EnemyBullet
-import scala.collection.mutable.ListBuffer
 
 /** 普通敌机 不可射击
   *

@@ -1,8 +1,9 @@
 package application
 
+import java.awt._
+import javax.swing._
+
 import application.Game;
-import javax.swing._;
-import java.awt._;
 
 /** 程序入口
   * @author
@@ -25,7 +26,6 @@ object Main extends App {
       WINDOW_WIDTH,
       WINDOW_HEIGHT
     )
-//   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
     frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE)
 
     var game = new Game()

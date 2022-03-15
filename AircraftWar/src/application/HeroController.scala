@@ -1,9 +1,9 @@
 package application
 
-import aircraft.HeroAircraft
-
 import java.awt.event.MouseAdapter
 import java.awt.event.MouseEvent
+
+import aircraft.HeroAircraft
 
 /** 英雄机控制类 监听鼠标，控制英雄机的移动
   *
@@ -11,9 +11,7 @@ import java.awt.event.MouseEvent
   *   hitsz
   */
 object HeroController {
-    // var game: Game
-    // var heroAircraft: HeroAircraft
-    // var mouseAdapter: MouseAdapter
+
     def apply(game: Game, heroAircraft: HeroAircraft) = {
         // this.game = game;
         // this.heroAircraft = heroAircraft;

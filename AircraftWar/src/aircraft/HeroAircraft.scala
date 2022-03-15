@@ -1,14 +1,11 @@
 package aircraft;
 
-import bullet.AbstractBullet;
-import bullet.HeroBullet;
-
-import java.util.LinkedList;
-import java.util.List;
-
-import scala.jdk.CollectionConverters._
+import java.util.LinkedList
 
 import scala.collection.mutable.ListBuffer
+
+import bullet.AbstractBullet
+import bullet.HeroBullet
 
 /** 英雄飞机，游戏玩家操控
   *

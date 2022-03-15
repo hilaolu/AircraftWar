@@ -1,20 +1,17 @@
 package application;
 
-import aircraft._;
-import bullet.AbstractBullet;
-import basic.AbstractFlyingObject;
-import org.apache.commons.lang3.concurrent.BasicThreadFactory;
-
-import javax.swing._;
-import java.awt._;
-import java.awt.image.BufferedImage;
-import java.util._;
-// import java.util.List;
-import java.util.concurrent._;
-
-import scala.jdk.CollectionConverters._
+import java.awt._
+import java.awt.image.BufferedImage
+import java.util._
+import java.util.concurrent._
+import javax.swing._
 
 import scala.collection.mutable.ListBuffer
+
+import aircraft._
+import basic.AbstractFlyingObject
+import bullet.AbstractBullet
+import org.apache.commons.lang3.concurrent.BasicThreadFactory
 
 /** 游戏主面板，游戏启动
   *

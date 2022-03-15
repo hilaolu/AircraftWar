@@ -1,10 +1,10 @@
 package basic
 
+import java.awt.image.BufferedImage
+
 import aircraft.AbstractAircraft
 import application.ImageManager
 import application.Main
-
-import java.awt.image.BufferedImage
 
 /** 可飞行对象的父类
   *
@@ -17,23 +17,6 @@ abstract class AbstractFlyingObject(
     protected var speedX: Int,
     protected var speedY: Int
 ) {
-
-    // locationX、locationY为图片中心位置坐标
-    /** x 轴坐标
-      */
-//   protected var locationX: Int;
-
-    /** y 轴坐标
-      */
-//   protected var locationY: Int;
-
-    /** x 轴移动速度
-      */
-//   protected var speedX: Int;
-
-    /** y 轴移动速度
-      */
-//   protected var speedY: Int;
 
     /** 图片, null 表示未设置
       */
@@ -52,18 +35,6 @@ abstract class AbstractFlyingObject(
     protected var isValid = true
 
     def AbstractFlyingObject() = {}
-
-//   def AbstractFlyingObject(
-//       locationX: Int,
-//       locationY: Int,
-//       speedX: Int,
-//       speedY: Int
-//   ) = {
-//     this.locationX = locationX
-//     this.locationY = locationY
-//     this.speedX = speedX
-//     this.speedY = speedY
-//   }
 
     /** 可飞行对象根据速度移动 若飞行对象触碰到横向边界，横向速度反向
       */
