@@ -25,9 +25,9 @@ jobs:
         run: cs install --channel https://git.io/Jqv1i scala2plantuml
 
       - name: generate uml
-        run: scala2plantuml -d 'out/AircraftWar/compile.dest/classes' -s 'src' --project 'AircraftWar' 'application/Main.' -o a.puml
+        run: scala2plantuml -d 'out/AircraftWar/compile.dest/classes' -s 'src' --project 'AircraftWar' 'application/Main.' -o aircraftwar.puml
       
-      - name: Generate SVG Diagrams
+      - name: generate svg diagrams
         uses: cloudbees/plantuml-github-action@master
         with:
             args: -v -tsvg *.puml 
