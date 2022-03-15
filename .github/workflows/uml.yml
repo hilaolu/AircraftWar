@@ -16,15 +16,20 @@ jobs:
       - uses: coursier/setup-action@v1
         with:
           jvm: adopt:11
-          apps: sbtn 
+          apps: mill 
+      
+      - name: compile
+        run: mill AircraftWar.compile
 
-      - name: install graphviz
-        run: sudo apt update && sudo apt install graphviz -y
+      - name: install scala2pantuml
+        run: cs install --channel https://git.io/Jqv1i scala2plantuml
 
       - name: generate uml
-        run: |
-          cd .. 
-          git clone https://github.com/tizuck/scala-uml.git
-          cd scala-uml
-          sbt "runMain app.ci.Main -f ../AircraftWar/AircraftWar/src/application -o ."
+        run: scala2plantuml -d 'out/AircraftWar/compile.dest/classes' -s 'src' --project 'AircraftWar' 'application/Main.' -o a.puml
+      
+      - name: upload uml
+        uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: *.puml 
           
