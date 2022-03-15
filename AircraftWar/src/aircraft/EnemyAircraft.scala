@@ -14,13 +14,8 @@ import bullet.EnemyBullet
   * @author
   *   hitsz
   */
-class EnemyAircraft(
-    locationX: Int,
-    locationY: Int,
-    speedX: Int,
-    speedY: Int,
-    hp: Int
-) extends AbstractAircraft(locationX, locationY, speedX, speedY, hp) {
+class EnemyAircraft(x: Int, y: Int, vx: Int, vy: Int, hp: Int)
+    extends AbstractAircraft(x, y, vx, vy, hp) {
 
     private var bullet_power = 1
 

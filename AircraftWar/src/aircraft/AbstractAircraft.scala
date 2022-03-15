@@ -10,12 +10,8 @@ import bullet.AbstractBullet
   * @author
   *   hitsz
   */
-abstract class AbstractAircraft(
-    locationX: Int,
-    locationY: Int,
-    speedX: Int,
-    speedY: Int
-) extends AbstractFlyingObject(locationX, locationY, speedX, speedY) {
+abstract class AbstractAircraft(x: Int, y: Int, vx: Int, vy: Int)
+    extends AbstractFlyingObject(x, y, vx, vy) {
 
     /** 生命值
       */
@@ -28,7 +24,7 @@ abstract class AbstractAircraft(
         speedX: Int,
         speedY: Int,
         hp: Int
-    ) {
+    ) = {
         this(locationX, locationY, speedX, speedY)
         this.hp = hp
         this.maxHp = hp

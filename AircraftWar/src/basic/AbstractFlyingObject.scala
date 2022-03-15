@@ -32,9 +32,7 @@ abstract class AbstractFlyingObject(
 
     /** 有效（生存）标记， 通常标记为 false的对象会再下次刷新时清除
       */
-    protected var isValid = true
-
-    def AbstractFlyingObject() = {}
+    protected var valid = true
 
     /** 可飞行对象根据速度移动 若飞行对象触碰到横向边界，横向速度反向
       */
@@ -115,7 +113,11 @@ abstract class AbstractFlyingObject(
     }
 
     def notValid(): Boolean = {
-        return !this.isValid
+        return !this.valid
+    }
+
+    def isValid(): Boolean = {
+        return this.valid
     }
 
     def isOutOfCanvas: Boolean = {
@@ -137,7 +139,7 @@ abstract class AbstractFlyingObject(
     /** 标记消失， isValid = false. notValid() => true.
       */
     def vanish() = {
-        isValid = false
+        valid = false
     }
 
 }

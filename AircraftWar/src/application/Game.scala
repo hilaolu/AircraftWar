@@ -81,7 +81,7 @@ class Game extends JPanel {
                 if (timeCountAndNewCycleJudge()) {
                     // System.out.println(time)
                     // 新敌机产生
-                    if (enemyAircrafts.size < enemyMaxNumber) {
+                    if (enemyAircrafts.length < enemyMaxNumber) {
                         enemyAircrafts.addOne(
                           new EnemyAircraft(
                             (
@@ -223,9 +223,9 @@ class Game extends JPanel {
     /** 后处理： 1. 删除无效的子弹 2. 删除无效的敌机 3. 检查英雄机生存 <p> 无效的原因可能是撞击或者飞出边界
       */
     private def postProcessAction() = {
-        enemyBullets = enemyBullets.filter(!_.notValid())
-        heroBullets = heroBullets.filter(!_.notValid())
-        enemyAircrafts = enemyAircrafts.filter(!_.notValid())
+        enemyBullets = enemyBullets.filter(_.isValid)
+        heroBullets = heroBullets.filter(_.isValid)
+        enemyAircrafts = enemyAircrafts.filter(_.isValid)
     }
 
     // ***********************
