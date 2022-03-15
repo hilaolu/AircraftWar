@@ -9,6 +9,7 @@ import java.util.List
 
 import scala.jdk.CollectionConverters._
 import bullet.EnemyBullet
+import scala.collection.mutable.ListBuffer
 
 /** 普通敌机 不可射击
   *
@@ -35,8 +36,8 @@ class EnemyAircraft(
         }
     }
 
-    def shoot: List[AbstractBullet] = {
-        var res: List[AbstractBullet] = new LinkedList()
+    def shoot(): ListBuffer[AbstractBullet] = {
+        var res: ListBuffer[AbstractBullet] = new ListBuffer()
         var abstractBullet = new EnemyBullet(
           locationX,
           locationY + 2,
@@ -44,7 +45,7 @@ class EnemyAircraft(
           speedY + direction * 5,
           bullet_power
         )
-        res.add(abstractBullet)
+        res.addOne(abstractBullet)
         res
     }
 

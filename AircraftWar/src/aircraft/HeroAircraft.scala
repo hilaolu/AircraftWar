@@ -8,6 +8,8 @@ import java.util.List;
 
 import scala.jdk.CollectionConverters._
 
+import scala.collection.mutable.ListBuffer
+
 /** 英雄飞机，游戏玩家操控
   *
   * @author
@@ -39,8 +41,8 @@ class HeroAircraft(
         // 英雄机由鼠标控制，不通过forward函数移动
     }
 
-    override def shoot: List[AbstractBullet] = {
-        var res: List[AbstractBullet] = new LinkedList();
+    override def shoot(): ListBuffer[AbstractBullet] = {
+        var res: ListBuffer[AbstractBullet] = new ListBuffer();
         var x: Int = this.getLocationX()
         var y: Int = this.getLocationY() + direction * 2
         var speedX: Int = 0
@@ -55,7 +57,7 @@ class HeroAircraft(
               speedY,
               power
             );
-            res.add(abstractBullet);
+            res.addOne(abstractBullet);
         }
         res
     }
