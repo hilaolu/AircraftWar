@@ -262,8 +262,7 @@ class Game extends JPanel {
         for (item <- items) {
             if (item.isValid) {
                 if (heroAircraft.crash(item)) {
-                    item.effect()
-                    item.vanish()
+                    item.effect(heroAircraft)
                 }
             }
         }
