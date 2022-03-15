@@ -19,7 +19,7 @@ jobs:
           apps: sbtn 
 
       - name: install graphviz
-        run: apt update && apt install graphviz -y
+        run: sudo apt update && sudo apt install graphviz -y
 
       - name: generate uml
         run: |
