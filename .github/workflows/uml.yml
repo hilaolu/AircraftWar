@@ -20,4 +20,7 @@ jobs:
 
       - name: install scala2pantuml
         run: cs install --channel https://git.io/Jqv1i scala2plantuml
+
+      - name: generate uml
+        run: scala2plantuml -s "./AircraftWar/src"
           
