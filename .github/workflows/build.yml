@@ -25,5 +25,5 @@ jobs:
           mill-version: 0.10.0
 
       - name: Build
-        run: |
-          mill __.compile
+        run: nix-shell --command 'mill __.compile' default.nix
+          
