@@ -5,6 +5,8 @@ import application.Main
 import bullet.AbstractBullet
 import bullet.EnemyBullet
 
+import weapon._
+
 import scala.collection.mutable.ListBuffer
 
 /** 普通敌机 不可射击
@@ -32,13 +34,16 @@ class EnemyAircraft(
         }
     }
 
+    val weapon = new MachineGun
     def shoot() = {
-        weapon.MachineGun(
+        weapon(
           () => new EnemyBullet(1),
           getLocationX(),
           getLocationY(),
           direction,
-          speed = 11
+          speed = 11,
+          shootNum = 1,
+          shoot_fatigue = 3
         )
     }
 }

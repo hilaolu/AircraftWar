@@ -5,6 +5,8 @@ import scala.collection.mutable.ListBuffer
 import bullet.AbstractBullet
 import bullet.HeroBullet
 
+import weapon._
+
 /** 英雄飞机，游戏玩家操控
   *
   * @author
@@ -36,8 +38,9 @@ class HeroAircraft(
         // 英雄机由鼠标控制，不通过forward函数移动
     }
 
+    val weapon = new MachineGun
     override def shoot() = {
-        weapon.MachineGun(
+        weapon(
           () => new HeroBullet(1),
           getLocationX(),
           getLocationY(),

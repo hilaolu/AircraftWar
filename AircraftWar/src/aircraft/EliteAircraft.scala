@@ -5,6 +5,7 @@ import application.Main
 
 import bullet.AbstractBullet
 import bullet.EnemyBullet
+import weapon._
 
 import item.BloodItem
 
@@ -27,7 +28,7 @@ class EliteAircraft(
 
     private val direction: Int = 1
 
-    val machine_gun = new weapon.MachineGun
+    val machine_gun = new MachineGun
 
     override def shoot() = {
         machine_gun(
