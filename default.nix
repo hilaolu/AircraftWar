@@ -5,7 +5,6 @@ pkgs.mkShell{
   buildInputs=[
     pkgs.git
     pkgs.direnv
-    pkgs.gcc
     pkgs.jdk11
   ];
 }              
