@@ -2,6 +2,7 @@ package bullet
 
 import basic.AbstractFlyingObject
 import application.Main
+import aircraft.AbstractAircraft
 
 /** 子弹类。 也可以考虑不同类型的子弹
   *
@@ -50,6 +51,8 @@ abstract class AbstractBullet(
     def setVY(vy: Int) = {
         speedY = vy
     }
+
+    def effect[T <: AbstractAircraft](o: T)
 
     override def forward() = {
         super.forward()

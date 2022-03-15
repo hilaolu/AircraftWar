@@ -219,6 +219,13 @@ class Game extends JPanel {
       */
     private def crashCheckAction() = {
         // TODO 敌机子弹攻击英雄
+        for (bullet <- enemyBullets) {
+            if (bullet.isValid) {
+                if (heroAircraft.crash(bullet)) {
+                    bullet.effect(heroAircraft)
+                }
+            }
+        }
 
         // 英雄子弹攻击敌机
         for (bullet <- heroBullets) {
@@ -230,8 +237,7 @@ class Game extends JPanel {
                         if (enemyAircraft.crash(bullet)) {
                             // 敌机撞击到英雄机子弹
                             // 敌机损失一定生命值
-                            enemyAircraft.decreaseHp(bullet.getPower())
-                            bullet.vanish()
+                            bullet.effect(enemyAircraft)
                             if (enemyAircraft.notValid()) {
                                 // TODO 获得分数，产生道具补给
                                 score += 10

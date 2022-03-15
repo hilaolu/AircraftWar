@@ -1,5 +1,7 @@
 package bullet
 
+import aircraft.AbstractAircraft
+
 /** @Author
   *   hitsz
   */
@@ -12,5 +14,10 @@ class HeroBullet(
 ) extends AbstractBullet(_locationX, _locationY, _speedX, _speedY, _power) {
     def this(power: Int) = {
         this(0, 0, 0, 0, power)
+    }
+
+    override def effect[T <: AbstractAircraft](o: T): Unit = {
+        o.decreaseHp(power)
+        vanish()
     }
 }
