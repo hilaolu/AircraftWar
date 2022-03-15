@@ -17,7 +17,7 @@ jobs:
 
       - name: Install direnv
         run: |
-          nix-env -iA nixpkgs.direnv
+          nix-env -iA nixos.direnv
 
       - name: Install mill
         uses: jodersky/setup-mill@master
