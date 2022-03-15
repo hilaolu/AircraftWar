@@ -163,6 +163,10 @@ class Game extends JPanel {
 
     }
 
+    def getHeroLocation(): Tuple2[Int, Int] = {
+        (heroAircraft.getLocationX(), heroAircraft.getLocationY())
+    }
+
     // ***********************
     // Action 各部分
     // ***********************
