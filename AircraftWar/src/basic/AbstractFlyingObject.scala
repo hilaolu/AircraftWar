@@ -118,6 +118,22 @@ abstract class AbstractFlyingObject(
         return !this.isValid
     }
 
+    def isOutOfCanvas: Boolean = {
+
+        if (locationX <= 0 || locationX >= Main.WINDOW_WIDTH) {
+            true
+        } else if (speedY > 0 && locationY >= Main.WINDOW_HEIGHT) {
+            // 向下飞行出界
+            true
+        } else if (locationY <= 0) {
+            // 向上飞行出界
+            true
+        }
+
+        false
+
+    }
+
     /** 标记消失， isValid = false. notValid() => true.
       */
     def vanish() = {
