@@ -1,7 +1,5 @@
 package aircraft
 
-import java.util.LinkedList
-
 import scala.collection.mutable.ListBuffer
 
 import bullet.AbstractBullet
