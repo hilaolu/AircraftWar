@@ -16,11 +16,15 @@ jobs:
       - uses: coursier/setup-action@v1
         with:
           jvm: adopt:11
-          apps: sbtn bloop 
+          apps: sbtn 
 
-      - name: install scala2pantuml
-        run: cs install --channel https://git.io/Jqv1i scala2plantuml
+      - name: install graphviz
+        run: apt update && apt install graphviz -y
 
       - name: generate uml
-        run: scala2plantuml -s "./AircraftWar/src" "AircraftWar."
+        run: |
+          cd .. 
+          git clone https://github.com/tizuck/scala-uml.git
+          cd scala-uml
+          sbt "runMain app.ci.Main -f ../AircraftWar/AircraftWar/src -o ."
           
