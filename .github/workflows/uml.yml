@@ -27,10 +27,16 @@ jobs:
       - name: generate uml
         run: scala2plantuml -d 'out/AircraftWar/compile.dest/classes' -s 'src' --project 'AircraftWar' 'application/Main.' -o a.puml
       
+      - name: Generate SVG Diagrams
+        uses: cloudbees/plantuml-github-action@master
+        with:
+            args: -v -tsvg *.puml 
+      
       - name: upload uml
         uses: actions/upload-artifact@v3
         with:
           name: my-artifact
           path: |
             ./*.puml 
+            ./*.svg
           
