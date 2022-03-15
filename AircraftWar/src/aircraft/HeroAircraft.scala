@@ -1,4 +1,4 @@
-package aircraft;
+package aircraft
 
 import java.util.LinkedList
 
@@ -39,7 +39,7 @@ class HeroAircraft(
     }
 
     override def shoot(): ListBuffer[AbstractBullet] = {
-        var res: ListBuffer[AbstractBullet] = new ListBuffer();
+        var res: ListBuffer[AbstractBullet] = new ListBuffer()
         var x: Int = this.getLocationX()
         var y: Int = this.getLocationY() + direction * 2
         var speedX: Int = 0
@@ -53,8 +53,8 @@ class HeroAircraft(
               speedX,
               speedY,
               power
-            );
-            res.addOne(abstractBullet);
+            )
+            res.addOne(abstractBullet)
         }
         res
     }

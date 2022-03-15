@@ -27,7 +27,7 @@ class EnemyAircraft(
     private val direction: Int = -1
 
     override def forward() = {
-        super.forward();
+        super.forward()
         // 判定 y 轴向下飞行出界
         if (locationY >= Main.WINDOW_HEIGHT) {
             vanish()

@@ -13,13 +13,11 @@ import aircraft.HeroAircraft
 object HeroController {
 
     def apply(game: Game, heroAircraft: HeroAircraft) = {
-        // this.game = game;
-        // this.heroAircraft = heroAircraft;
 
         var mouseAdapter = new MouseAdapter() {
 
             override def mouseDragged(e: MouseEvent) = {
-                super.mouseDragged(e);
+                super.mouseDragged(e)
                 val x = e.getX()
                 val y = e.getY()
                 if (
@@ -32,8 +30,8 @@ object HeroController {
             }
         }
 
-        game.addMouseListener(mouseAdapter);
-        game.addMouseMotionListener(mouseAdapter);
+        game.addMouseListener(mouseAdapter)
+        game.addMouseMotionListener(mouseAdapter)
     }
 
 }

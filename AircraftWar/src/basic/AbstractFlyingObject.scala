@@ -54,7 +54,7 @@ abstract class AbstractFlyingObject(
       * @param flyingObject
       *   撞击对方
       * @return
-      *   true: 我方被击中; false 我方未被击中
+      *   true: 我方被击中 false 我方未被击中
       */
     def crash(flyingObject: AbstractFlyingObject): Boolean = {
         // 缩放因子，用于控制 y轴方向区域范围
@@ -79,7 +79,7 @@ abstract class AbstractFlyingObject(
     }
 
     def getLocationY(): Int = {
-        return locationY;
+        return locationY
     }
 
     def setLocation(locationX: Double, locationY: Double) {
@@ -88,7 +88,7 @@ abstract class AbstractFlyingObject(
     }
 
     def getSpeedY(): Int = {
-        return speedY;
+        return speedY
     }
 
     def getImage(): BufferedImage = {

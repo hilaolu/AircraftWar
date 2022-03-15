@@ -1,4 +1,4 @@
-package aircraft;
+package aircraft
 
 import scala.collection.mutable.ListBuffer
 

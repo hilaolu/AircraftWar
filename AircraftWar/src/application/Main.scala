@@ -3,7 +3,7 @@ package application
 import java.awt._
 import javax.swing._
 
-import application.Game;
+import application.Game
 
 /** 程序入口
   * @author
