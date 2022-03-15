@@ -13,12 +13,12 @@ import bullet.HeroBullet
   *   hitsz
   */
 class HeroAircraft(
-    locationX: Int,
-    locationY: Int,
-    speedX: Int,
-    speedY: Int,
-    hp: Int
-) extends AbstractAircraft(locationX, locationY, speedX, speedY, hp) {
+    _locationX: Int,
+    _locationY: Int,
+    _speedX: Int,
+    _speedY: Int,
+    _hp: Int
+) extends AbstractAircraft(_locationX, _locationY, _speedX, _speedY, _hp) {
 
     /** 攻击方式 */
 

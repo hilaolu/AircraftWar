@@ -4,9 +4,9 @@ package bullet
   *   hitsz
   */
 class EnemyBullet(
-    locationX: Int,
-    locationY: Int,
-    speedX: Int,
-    speedY: Int,
-    power: Int
-) extends AbstractBullet(locationX, locationY, speedX, speedY, power) {}
+    _locationX: Int,
+    _locationY: Int,
+    _speedX: Int,
+    _speedY: Int,
+    _power: Int
+) extends AbstractBullet(_locationX, _locationY, _speedX, _speedY, _power) {}

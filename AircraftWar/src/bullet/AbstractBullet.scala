@@ -9,11 +9,11 @@ import application.Main
   *   hitsz
   */
 abstract class AbstractBullet(
-    locationX: Int,
-    locationY: Int,
-    speedX: Int,
-    speedY: Int
-) extends AbstractFlyingObject(locationX, locationY, speedX, speedY) {
+    _locationX: Int,
+    _locationY: Int,
+    _speedX: Int,
+    _speedY: Int
+) extends AbstractFlyingObject(_locationX, _locationY, _speedX, _speedY) {
 
     var power = 10
 
