@@ -28,6 +28,8 @@ class EliteAircraft(
 
     private val direction: Int = 1
 
+    override def score: Int = 20
+
     val machine_gun = new MachineGun
 
     override def shoot() = {

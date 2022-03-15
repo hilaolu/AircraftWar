@@ -26,6 +26,8 @@ class EnemyAircraft(
 
     private val direction: Int = 1
 
+    def score: Int = 10
+
     override def forward() = {
         super.forward()
         // 判定 y 轴向下飞行出界
@@ -45,5 +47,12 @@ class EnemyAircraft(
           shootNum = 1,
           shoot_fatigue = 3
         )
+    }
+
+    override def vanish(): Unit = {
+        if (getHp() == 0) {
+            application.Main.game.addScore(score)
+        }
+        super.vanish()
     }
 }

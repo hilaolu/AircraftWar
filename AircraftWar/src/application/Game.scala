@@ -167,6 +167,10 @@ class Game extends JPanel {
         (heroAircraft.getLocationX(), heroAircraft.getLocationY())
     }
 
+    def addScore(adder: Int) = {
+        score += adder
+    }
+
     // ***********************
     // Action 各部分
     // ***********************
@@ -238,10 +242,6 @@ class Game extends JPanel {
                             // 敌机撞击到英雄机子弹
                             // 敌机损失一定生命值
                             bullet.effect(enemyAircraft)
-                            if (enemyAircraft.notValid()) {
-                                // TODO 获得分数，产生道具补给
-                                score += 10
-                            }
                         }
                         // 英雄机 与 敌机 相撞，均损毁
                         if (
