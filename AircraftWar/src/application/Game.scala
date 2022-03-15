@@ -91,8 +91,24 @@ class Game extends JPanel {
                             (Math
                                 .random() * Main.WINDOW_HEIGHT * 0.2).toInt * 1,
                             0,
-                            10,
+                            5,
                             30
+                          )
+                        )
+                    }
+
+                    if (Events.EliteEvent()) {
+                        enemyAircrafts.addOne(
+                          new EliteAircraft(
+                            (
+                              Math.random() * (Main.WINDOW_WIDTH - ImageManager.MOB_ENEMY_IMAGE
+                                  .getWidth())
+                            ).toInt * 1,
+                            (Math
+                                .random() * Main.WINDOW_HEIGHT * 0.2).toInt * 1,
+                            0,
+                            3,
+                            60
                           )
                         )
                     }
