@@ -26,5 +26,5 @@ jobs:
           cd .. 
           git clone https://github.com/tizuck/scala-uml.git
           cd scala-uml
-          sbt "runMain app.ci.Main -f ../AircraftWar/AircraftWar/src -o ."
+          sbt "runMain app.ci.Main -f ../AircraftWar/AircraftWar/src/application -o ."
           
