@@ -1,14 +1,14 @@
 package application
 
-import scala.math.random
+import scala.util.Random
 
 //todo event queue
 object Events {
     def EliteEvent(): Boolean = {
-        RandomInt() % 100 == 1
+        RandomInt() % 20 == 1
     }
 
     def RandomInt(): Int = {
-        random().toInt
+        Random.between(0, 1000)
     }
 }

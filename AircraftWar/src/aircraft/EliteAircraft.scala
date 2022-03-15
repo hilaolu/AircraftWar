@@ -22,15 +22,19 @@ class EliteAircraft(
 
     private var bullet_power = 2
 
-    private val direction: Int = -1
+    private val direction: Int = 1
+
+    val machine_gun = new weapon.MachineGun
 
     override def shoot() = {
-        weapon.MachineGun(
+        machine_gun(
           () => new EnemyBullet(1),
           getLocationX(),
           getLocationY(),
           direction,
-          7
+          7,
+          shootNum = 6,
+          shoot_fatigue = 30
         )
     }
 }

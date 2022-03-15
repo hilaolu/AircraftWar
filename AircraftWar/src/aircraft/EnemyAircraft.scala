@@ -22,7 +22,7 @@ class EnemyAircraft(
 
     private var bullet_power = 1
 
-    private val direction: Int = -1
+    private val direction: Int = 1
 
     override def forward() = {
         super.forward()
