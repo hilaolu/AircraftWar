@@ -9,6 +9,7 @@ import javax.swing._
 import scala.collection.mutable.ListBuffer
 
 import aircraft._
+import item._
 import basic.AbstractFlyingObject
 import bullet.AbstractBullet
 import org.apache.commons.lang3.concurrent.BasicThreadFactory
@@ -41,6 +42,9 @@ class Game extends JPanel {
     private var enemyBullets: ListBuffer[AbstractBullet] =
         new ListBuffer()
 
+    private var items: ListBuffer[AbstractItem] =
+        new ListBuffer()
+
     private val enemyMaxNumber = 5
 
     private var gameOverFlag = false
@@ -66,6 +70,10 @@ class Game extends JPanel {
               .daemon(true)
               .build()
         )
+
+    def addItem[T <: AbstractItem](item: T) = {
+        items.addOne(item)
+    }
 
     /** 游戏启动入口，执行游戏逻辑
       */
@@ -108,7 +116,7 @@ class Game extends JPanel {
                                 .random() * Main.WINDOW_HEIGHT * 0.2).toInt * 1,
                             0,
                             3,
-                            20
+                            2
                           )
                         )
                     }
@@ -121,6 +129,8 @@ class Game extends JPanel {
 
                 // 飞机移动
                 aircraftsMoveAction()
+
+                itemsMoveAction()
 
                 // 撞击检测
                 crashCheckAction()
@@ -186,6 +196,12 @@ class Game extends JPanel {
         }
         for (bullet <- enemyBullets) {
             bullet.forward()
+        }
+    }
+
+    private def itemsMoveAction() = {
+        for (item <- items) {
+            item.forward()
         }
     }
 
@@ -274,6 +290,7 @@ class Game extends JPanel {
         paintImageWithPositionRevised(g, heroBullets)
 
         paintImageWithPositionRevised(g, enemyAircrafts)
+        paintImageWithPositionRevised(g, items)
 
         g.drawImage(
           ImageManager.HERO_IMAGE,

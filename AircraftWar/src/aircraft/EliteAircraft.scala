@@ -2,8 +2,11 @@ package aircraft
 
 import application.Game
 import application.Main
+
 import bullet.AbstractBullet
 import bullet.EnemyBullet
+
+import item.BloodItem
 
 import scala.collection.mutable.ListBuffer
 
@@ -36,5 +39,18 @@ class EliteAircraft(
           shootNum = 6,
           shoot_fatigue = 30
         )
+    }
+
+    override def vanish(): Unit = {
+        super.vanish()
+
+        val item = new BloodItem(
+          getLocationX(),
+          getLocationY(),
+          0,
+          5
+        )
+
+        application.Main.game.addItem(item)
     }
 }

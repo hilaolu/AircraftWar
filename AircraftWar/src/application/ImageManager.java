@@ -2,6 +2,7 @@ package application;
 
 import aircraft.*;
 import bullet.*;
+import item.*;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -61,6 +62,8 @@ public class ImageManager {
 
 			CLASSNAME_IMAGE_MAP.put(HeroBullet.class.getName(), HERO_BULLET_IMAGE);
 			CLASSNAME_IMAGE_MAP.put(EnemyBullet.class.getName(), ENEMY_BULLET_IMAGE);
+
+			CLASSNAME_IMAGE_MAP.put(BloodItem.class.getName(), BLOOD_ITEM_IMAGE);
 
 		} catch (IOException e) {
 			e.printStackTrace();
