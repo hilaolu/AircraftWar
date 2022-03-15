@@ -30,8 +30,8 @@ class Game extends JPanel {
     private val timeInterval = 40;
 
     private final var heroAircraft: HeroAircraft = new HeroAircraft(
-      512 / 2,
-      768 - ImageManager.HERO_IMAGE.getHeight(),
+      Main.WINDOW_WIDTH / 2,
+      Main.WINDOW_HEIGHT - ImageManager.HERO_IMAGE.getHeight(),
       0,
       0,
       100
@@ -88,10 +88,11 @@ class Game extends JPanel {
                         enemyAircrafts.addOne(
                           new EnemyAircraft(
                             (
-                              Math.random() * (512 - ImageManager.MOB_ENEMY_IMAGE
+                              Math.random() * (Main.WINDOW_WIDTH - ImageManager.MOB_ENEMY_IMAGE
                                   .getWidth())
                             ).toInt * 1,
-                            (Math.random() * 768 * 0.2).toInt * 1,
+                            (Math
+                                .random() * Main.WINDOW_HEIGHT * 0.2).toInt * 1,
                             0,
                             10,
                             30
@@ -245,12 +246,12 @@ class Game extends JPanel {
         g.drawImage(
           ImageManager.BACKGROUND_IMAGE,
           0,
-          this.backGroundTop - 768,
+          this.backGroundTop - Main.WINDOW_HEIGHT,
           null
         );
         g.drawImage(ImageManager.BACKGROUND_IMAGE, 0, this.backGroundTop, null);
         this.backGroundTop += 1;
-        if (this.backGroundTop == 768) {
+        if (this.backGroundTop == Main.WINDOW_HEIGHT) {
             this.backGroundTop = 0;
         }
 

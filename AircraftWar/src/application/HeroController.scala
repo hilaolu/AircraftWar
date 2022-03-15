@@ -24,7 +24,9 @@ object HeroController {
                 super.mouseDragged(e);
                 val x = e.getX()
                 val y = e.getY()
-                if (x < 0 || x > 512 || y < 0 || y > 768) {
+                if (
+                  x < 0 || x > Main.WINDOW_WIDTH || y < 0 || y > Main.WINDOW_HEIGHT
+                ) {
                     // 防止超出边界
                 } else {
                     heroAircraft.setLocation(x, y)
