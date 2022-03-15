@@ -15,10 +15,6 @@ jobs:
       - name: Install Nix
         uses: cachix/install-nix-action@v16
 
-      - name: Install direnv
-        run: |
-          nix-env -iA nixos.direnv
-
       - name: Install mill
         uses: jodersky/setup-mill@master
         with:
