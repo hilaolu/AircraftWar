@@ -1,0 +1,23 @@
+name: Build extension
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      - uses: coursier/setup-action@v1
+        with:
+          jvm: adopt:11
+          apps: sbtn bloop 
+
+      - name: install scala2pantuml
+        run: cs install --channel https://git.io/Jqv1i scala2plantuml
+          
