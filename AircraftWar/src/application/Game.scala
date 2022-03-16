@@ -57,6 +57,8 @@ class Game extends JPanel {
 
     HeroController.apply(this, heroAircraft)
 
+    dummy()
+
     private final var executorService: ScheduledExecutorService =
         new ScheduledThreadPoolExecutor(
           1,
