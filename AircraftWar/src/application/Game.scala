@@ -15,11 +15,6 @@ import basic.AbstractFlyingObject
 import bullet.AbstractBullet
 import org.apache.commons.lang3.concurrent.BasicThreadFactory
 
-/** 游戏主面板，游戏启动
-  *
-  * @author
-  *   hitsz
-  */
 class Game extends JPanel {
 
     private var backGroundTop = 0
