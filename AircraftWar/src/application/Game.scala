@@ -10,6 +10,7 @@ import scala.collection.mutable.ListBuffer
 
 import aircraft._
 import item._
+import bullet._
 import basic.AbstractFlyingObject
 import bullet.AbstractBullet
 import org.apache.commons.lang3.concurrent.BasicThreadFactory
@@ -294,6 +295,19 @@ class Game extends JPanel {
         g.setFont(new Font("SansSerif", Font.BOLD, 22))
         g.drawString("SCORE:" + this.score, x, y)
         g.drawString("LIFE:" + this.heroAircraft.getHp(), x, y + 20)
+    }
+
+    val d = new dummy
+
+    class dummy {
+        val s0: Option[BossAircraft] = None
+        val s1: Option[EliteAircraft] = None
+        val s2: Option[EnemyAircraft] = None
+        val s3: Option[HeroBullet] = None
+        val s4: Option[EnemyBullet] = None
+        val s5: Option[BloodItem] = None
+        val s6: Option[BombItem] = None
+        val s7: Option[BulletItem] = None
     }
 
 }
