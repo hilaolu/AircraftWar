@@ -8,7 +8,12 @@ import javax.swing._
 
 import scala.collection.mutable.ListBuffer
 
-import aircraft._
+import aircraft.BossAircraft
+import aircraft.EliteAircraft
+import aircraft.EnemyAircraft
+import aircraft.HeroAircraft
+import aircraft.AbstractAircraft
+
 import item._
 import basic.AbstractFlyingObject
 import bullet.AbstractBullet
