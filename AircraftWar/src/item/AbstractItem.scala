@@ -1,7 +1,7 @@
 package item
 
 import basic.AbstractFlyingObject
-import application.Main
+import application.Game
 import aircraft.AbstractAircraft
 
 abstract class AbstractItem(
@@ -19,6 +19,6 @@ abstract class AbstractItem(
         }
     }
 
-    def effect[T <: AbstractAircraft](o: T)
+    def effect(o: Game)
 
 }

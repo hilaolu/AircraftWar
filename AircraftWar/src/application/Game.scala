@@ -139,8 +139,8 @@ class Game extends JPanel {
 
     }
 
-    def getHeroLocation(): Tuple2[Int, Int] = {
-        (heroAircraft.getLocationX(), heroAircraft.getLocationY())
+    def getHero(): HeroAircraft = {
+        heroAircraft
     }
 
     def addScore(adder: Int) = {
@@ -221,7 +221,7 @@ class Game extends JPanel {
         for (item <- items) {
             if (item.isValid) {
                 if (heroAircraft.crash(item)) {
-                    item.effect(heroAircraft)
+                    item.effect(this)
                 }
             }
         }

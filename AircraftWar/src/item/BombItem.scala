@@ -1,7 +1,7 @@
 package item
 
 import basic.AbstractFlyingObject
-import application.Main
+import application.Game
 import aircraft.AbstractAircraft
 
 class BombItem(
@@ -11,7 +11,7 @@ class BombItem(
     _speedY: Int
 ) extends AbstractItem(_locationX, _locationY, _speedX, _speedY) {
 
-    def effect[T <: AbstractAircraft](o: T): Unit = {
+    def effect(o: Game): Unit = {
         println("[Bomb Item Applied]")
     }
 }
