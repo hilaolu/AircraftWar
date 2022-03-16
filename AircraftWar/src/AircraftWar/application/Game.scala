@@ -57,7 +57,7 @@ class Game extends JPanel {
 
     HeroController.apply(this, heroAircraft)
 
-    dummy()
+    private val d = new dummy
 
     private final var executorService: ScheduledExecutorService =
         new ScheduledThreadPoolExecutor(
@@ -301,7 +301,7 @@ class Game extends JPanel {
         g.drawString("LIFE:" + this.heroAircraft.getHp(), x, y + 20)
     }
 
-    private def dummy() = {
+    class dummy {
         val s0: Option[BossAircraft] = None
         val s1: Option[EliteAircraft] = None
         val s2: Option[EnemyAircraft] = None
