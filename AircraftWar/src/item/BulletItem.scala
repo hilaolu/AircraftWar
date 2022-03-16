@@ -5,11 +5,11 @@ import application.Game
 import aircraft.AbstractAircraft
 
 class BulletItem(
-    _locationX: Int,
-    _locationY: Int,
-    _speedX: Int,
-    _speedY: Int
-) extends AbstractItem(_locationX, _locationY, _speedX, _speedY) {
+    var locationX: Int,
+    var locationY: Int,
+    var speedX: Int,
+    var speedY: Int
+) extends AbstractItem {
 
     def effect(o: Game): Unit = {
         println("[Bullet Item Applied]")

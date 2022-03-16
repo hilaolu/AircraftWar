@@ -73,7 +73,7 @@ class Game extends JPanel {
                 if (timeCountAndNewCycleJudge()) {
                     if (enemyAircrafts.length < enemyMaxNumber) {
                         enemyAircrafts.addOne(
-                          new EnemyAircraft(
+                          new TrivialEnemy(
                             (
                               Math.random() * (Main.WINDOW_WIDTH - ImageManager.MOB_ENEMY_IMAGE
                                   .getWidth())
@@ -89,7 +89,7 @@ class Game extends JPanel {
 
                     if (Events.EliteEvent()) {
                         enemyAircrafts.addOne(
-                          new EliteAircraft(
+                          new EliteEnemy(
                             (
                               Math.random() * (Main.WINDOW_WIDTH - ImageManager.MOB_ENEMY_IMAGE
                                   .getWidth())
@@ -295,9 +295,9 @@ class Game extends JPanel {
     val d = new dummy
 
     class dummy {
-        val s0: Option[BossAircraft] = None
-        val s1: Option[EliteAircraft] = None
-        val s2: Option[EnemyAircraft] = None
+        val s0: Option[BossEnemy] = None
+        val s1: Option[EliteEnemy] = None
+        val s2: Option[TrivialEnemy] = None
         val s3: Option[HeroBullet] = None
         val s4: Option[EnemyBullet] = None
         val s5: Option[BloodItem] = None

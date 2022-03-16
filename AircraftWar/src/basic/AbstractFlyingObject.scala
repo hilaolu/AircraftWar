@@ -6,13 +6,12 @@ import aircraft.AbstractAircraft
 import application.ImageManager
 import application.Main
 
-abstract class AbstractFlyingObject(
-    protected var locationX: Int,
-    protected var locationY: Int,
-    protected var speedX: Int,
-    protected var speedY: Int
-) {
+abstract class AbstractFlyingObject {
 
+    protected var locationX: Int
+    protected var locationY: Int
+    protected var speedX: Int
+    protected var speedY: Int
     protected var image: BufferedImage = null
 
     protected var width = -1

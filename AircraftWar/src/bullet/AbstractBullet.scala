@@ -8,33 +8,9 @@ trait Effect {
     def effect[T <: AbstractAircraft](o: T)
 }
 
-abstract class AbstractBullet(
-    _locationX: Int,
-    _locationY: Int,
-    _speedX: Int,
-    _speedY: Int
-) extends AbstractFlyingObject(_locationX, _locationY, _speedX, _speedY)
-    with Effect {
+abstract class AbstractBullet extends AbstractFlyingObject with Effect {
 
-    var power = 10
-
-    def this(
-        _locationX: Int,
-        _locationY: Int,
-        _speedX: Int,
-        _speedY: Int,
-        _power: Int
-    ) = {
-        this(_locationX, _locationY, _speedX, _speedY)
-        power = _power
-    }
-
-    def this(
-        _power: Int
-    ) = {
-        this(0, 0, 0, 0)
-        power = _power
-    }
+    var power: Int
 
     def setX(x: Int) = {
         locationX = x

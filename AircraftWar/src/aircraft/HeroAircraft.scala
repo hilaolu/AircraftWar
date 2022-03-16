@@ -8,12 +8,12 @@ import bullet.HeroBullet
 import weapon._
 
 class HeroAircraft(
-    _locationX: Int,
-    _locationY: Int,
-    _speedX: Int,
-    _speedY: Int,
-    _hp: Int
-) extends AbstractAircraft(_locationX, _locationY, _speedX, _speedY, _hp) {
+    var locationX: Int,
+    var locationY: Int,
+    var speedX: Int,
+    var speedY: Int,
+    var hp: Int
+) extends AbstractAircraft {
 
     private var shootNum: Int = 1
 

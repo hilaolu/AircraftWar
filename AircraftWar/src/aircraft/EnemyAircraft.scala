@@ -9,19 +9,13 @@ import weapon._
 
 import scala.collection.mutable.ListBuffer
 
-class EnemyAircraft(
-    _locationX: Int,
-    _locationY: Int,
-    _speedX: Int,
-    _speedY: Int,
-    _hp: Int
-) extends AbstractAircraft(_locationX, _locationY, _speedX, _speedY, _hp) {
+abstract class EnemyAircraft extends AbstractAircraft {
 
     private val bullet_power = 1
 
     private val direction: Int = 1
 
-    def score: Int = 10
+    val score: Int
 
     override def forward() = {
         super.forward()

@@ -11,24 +11,22 @@ import item.BloodItem
 
 import scala.collection.mutable.ListBuffer
 
-class BossAircraft(
-    _locationX: Int,
-    _locationY: Int,
-    _speedX: Int,
-    _speedY: Int,
-    _hp: Int
-) extends EnemyAircraft(_locationX, _locationY, _speedX, _speedY, _hp) {
+class EliteEnemy(
+    var locationX: Int,
+    var locationY: Int,
+    var speedX: Int,
+    var speedY: Int,
+    var hp: Int
+) extends EnemyAircraft {
 
     private val bullet_power = 2
 
     private val direction: Int = 1
 
-    override def score: Int = 20
-
-    val machine_gun = new MachineGun
+    val score = 20
 
     override def shoot() = {
-        machine_gun(
+        weapon(
           () => new EnemyBullet(1),
           getLocationX(),
           getLocationY(),

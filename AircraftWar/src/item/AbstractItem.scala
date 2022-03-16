@@ -8,13 +8,7 @@ trait Effect {
     def effect(o: Game)
 }
 
-abstract class AbstractItem(
-    _locationX: Int,
-    _locationY: Int,
-    _speedX: Int,
-    _speedY: Int
-) extends AbstractFlyingObject(_locationX, _locationY, _speedX, _speedY)
-    with Effect {
+abstract class AbstractItem extends AbstractFlyingObject with Effect {
 
     override def forward() = {
         super.forward()

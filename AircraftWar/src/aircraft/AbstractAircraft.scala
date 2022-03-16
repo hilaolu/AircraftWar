@@ -5,16 +5,10 @@ import scala.collection.mutable.ListBuffer
 import basic.AbstractFlyingObject
 import bullet.AbstractBullet
 
-abstract class AbstractAircraft(
-    _locationX: Int,
-    _locationY: Int,
-    _speedX: Int,
-    _speedY: Int,
-    _hp: Int
-) extends AbstractFlyingObject(_locationX, _locationY, _speedX, _speedY) {
+abstract class AbstractAircraft extends AbstractFlyingObject {
 
-    val maxHp: Int = _hp
-    var hp: Int = _hp
+    var hp: Int
+    val maxHp: Int = hp
 
     def decreaseHp(decrease: Int) = {
         hp -= decrease

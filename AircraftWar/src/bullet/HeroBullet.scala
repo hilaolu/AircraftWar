@@ -3,12 +3,12 @@ package bullet
 import aircraft.AbstractAircraft
 
 class HeroBullet(
-    _locationX: Int,
-    _locationY: Int,
-    _speedX: Int,
-    _speedY: Int,
-    _power: Int
-) extends AbstractBullet(_locationX, _locationY, _speedX, _speedY, _power) {
+    var locationX: Int,
+    var locationY: Int,
+    var speedX: Int,
+    var speedY: Int,
+    var power: Int
+) extends AbstractBullet {
     def this(power: Int) = {
         this(0, 0, 0, 0, power)
     }
