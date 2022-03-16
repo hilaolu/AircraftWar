@@ -4,12 +4,17 @@ import basic.AbstractFlyingObject
 import application.Main
 import aircraft.AbstractAircraft
 
+trait Effect {
+    def effect[T <: AbstractAircraft](o: T)
+}
+
 abstract class AbstractBullet(
     _locationX: Int,
     _locationY: Int,
     _speedX: Int,
     _speedY: Int
-) extends AbstractFlyingObject(_locationX, _locationY, _speedX, _speedY) {
+) extends AbstractFlyingObject(_locationX, _locationY, _speedX, _speedY)
+    with Effect {
 
     var power = 10
 
@@ -46,8 +51,6 @@ abstract class AbstractBullet(
     def setVY(vy: Int) = {
         speedY = vy
     }
-
-    def effect[T <: AbstractAircraft](o: T)
 
     override def forward() = {
         super.forward()
