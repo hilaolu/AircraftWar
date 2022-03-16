@@ -2,9 +2,6 @@ package bullet
 
 import aircraft.AbstractAircraft
 
-/** @Author
-  *   hitsz
-  */
 class HeroBullet(
     _locationX: Int,
     _locationY: Int,

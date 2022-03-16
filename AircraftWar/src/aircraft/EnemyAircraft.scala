@@ -9,11 +9,6 @@ import weapon._
 
 import scala.collection.mutable.ListBuffer
 
-/** 普通敌机 不可射击
-  *
-  * @author
-  *   hitsz
-  */
 class EnemyAircraft(
     _locationX: Int,
     _locationY: Int,
@@ -22,7 +17,7 @@ class EnemyAircraft(
     _hp: Int
 ) extends AbstractAircraft(_locationX, _locationY, _speedX, _speedY, _hp) {
 
-    private var bullet_power = 1
+    private val bullet_power = 1
 
     private val direction: Int = 1
 

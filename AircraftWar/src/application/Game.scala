@@ -23,8 +23,6 @@ class Game extends JPanel {
 
     private var backGroundTop = 0
 
-    /** 时间间隔(ms)，控制刷新频率
-      */
     private val timeInterval = 40
 
     private final var heroAircraft: HeroAircraft = new HeroAircraft(
@@ -51,17 +49,11 @@ class Game extends JPanel {
     private var score = 0
     private var time = 0
 
-    /** 周期（ms) 指示子弹的发射、敌机的产生频率
-      */
     private var cycleDuration = 600
     private var cycleTime = 0
 
-    // 启动英雄机鼠标监听
     HeroController.apply(this, heroAircraft)
 
-    /** Scheduled 线程池，用于定时任务调度 关于alibaba code guide：可命名的 ThreadFactory 一般需要第三方包
-      * apache 第三方库： org.apache.commons.lang3.concurrent.BasicThreadFactory
-      */
     private final var executorService: ScheduledExecutorService =
         new ScheduledThreadPoolExecutor(
           1,
@@ -75,20 +67,14 @@ class Game extends JPanel {
         items.addOne(item)
     }
 
-    /** 游戏启动入口，执行游戏逻辑
-      */
     def action() = {
 
-        // 定时任务：绘制、对象产生、碰撞判定、击毁及结束判定
         object task extends Runnable {
             def run() = {
 
                 time += timeInterval
 
-                // 周期性执行（控制频率）
                 if (timeCountAndNewCycleJudge()) {
-                    // System.out.println(time)
-                    // 新敌机产生
                     if (enemyAircrafts.length < enemyMaxNumber) {
                         enemyAircrafts.addOne(
                           new EnemyAircraft(
@@ -120,30 +106,22 @@ class Game extends JPanel {
                           )
                         )
                     }
-                    // 飞机射出子弹
                     shootAction()
                 }
 
-                // 子弹移动
                 bulletsMoveAction()
 
-                // 飞机移动
                 aircraftsMoveAction()
 
                 itemsMoveAction()
 
-                // 撞击检测
                 crashCheckAction()
 
-                // 后处理
                 postProcessAction()
 
-                // 每个时刻重绘界面
                 repaint()
 
-                // 游戏结束检查
                 if (heroAircraft.getHp() <= 0 && !Main.debug) {
-                    // 游戏结束
                     executorService.shutdown()
                     gameOverFlag = true
                     System.out.println("Game Over!")
@@ -152,8 +130,6 @@ class Game extends JPanel {
             }
         }
 
-        /** 以固定延迟时间进行执行 本次任务执行完成后，需要延迟设定的延迟时间，才会执行新的任务
-          */
         executorService.scheduleWithFixedDelay(
           task,
           timeInterval,
@@ -171,30 +147,23 @@ class Game extends JPanel {
         score += adder
     }
 
-    // ***********************
-    // Action 各部分
-    // ***********************
-
     private def timeCountAndNewCycleJudge(): Boolean = {
         cycleTime += timeInterval
         if (
           cycleTime >= cycleDuration && cycleTime - timeInterval < cycleTime
         ) {
-            // 跨越到新的周期
             cycleTime %= cycleDuration
-            return true
+            true
         } else {
-            return false
+            false
         }
     }
 
     private def shootAction() = {
-        // TODO 敌机射击
         for (enemyAircraft <- enemyAircrafts) {
             enemyBullets.addAll(enemyAircraft.shoot())
         }
 
-        // 英雄射击
         heroBullets.addAll(heroAircraft.shoot())
     }
 
@@ -219,10 +188,7 @@ class Game extends JPanel {
         }
     }
 
-    /** 碰撞检测： 1. 敌机攻击英雄 2. 英雄攻击/撞击敌机 3. 英雄获得补给
-      */
     private def crashCheckAction() = {
-        // TODO 敌机子弹攻击英雄
         for (bullet <- enemyBullets) {
             if (bullet.isValid) {
                 if (heroAircraft.crash(bullet)) {
@@ -231,19 +197,13 @@ class Game extends JPanel {
             }
         }
 
-        // 英雄子弹攻击敌机
         for (bullet <- heroBullets) {
             if (!bullet.notValid()) {
                 for (enemyAircraft <- enemyAircrafts) {
                     if (!enemyAircraft.notValid()) {
-                        // 已被其他子弹击毁的敌机，不再检测
-                        // 避免多个子弹重复击毁同一敌机的判定
                         if (enemyAircraft.crash(bullet)) {
-                            // 敌机撞击到英雄机子弹
-                            // 敌机损失一定生命值
                             bullet.effect(enemyAircraft)
                         }
-                        // 英雄机 与 敌机 相撞，均损毁
                         if (
                           enemyAircraft
                               .crash(heroAircraft) || heroAircraft.crash(
@@ -258,7 +218,6 @@ class Game extends JPanel {
             }
         }
 
-        // Todo: 我方获得道具，道具生效
         for (item <- items) {
             if (item.isValid) {
                 if (heroAircraft.crash(item)) {
@@ -269,8 +228,6 @@ class Game extends JPanel {
 
     }
 
-    /** 后处理： 1. 删除无效的子弹 2. 删除无效的敌机 3. 检查英雄机生存 <p> 无效的原因可能是撞击或者飞出边界
-      */
     private def postProcessAction() = {
         enemyBullets = enemyBullets.filter(_.isValid)
         heroBullets = heroBullets.filter(_.isValid)
@@ -278,18 +235,9 @@ class Game extends JPanel {
         items = items.filter(_.isValid)
     }
 
-    // ***********************
-    // Paint 各部分
-    // ***********************
-
-    /** 重写paint方法 通过重复调用paint方法，实现游戏动画
-      *
-      * @param g
-      */
     override def paint(g: Graphics) = {
         super.paint(g)
 
-        // 绘制背景,图片滚动
         g.drawImage(
           ImageManager.BACKGROUND_IMAGE,
           0,
@@ -302,8 +250,6 @@ class Game extends JPanel {
             this.backGroundTop = 0
         }
 
-        // 先绘制子弹，后绘制飞机
-        // 这样子弹显示在飞机的下层
         paintImageWithPositionRevised(g, enemyBullets)
         paintImageWithPositionRevised(g, heroBullets)
 
@@ -317,7 +263,6 @@ class Game extends JPanel {
           null
         )
 
-        // 绘制得分和生命值
         paintScoreAndLife(g)
 
     }

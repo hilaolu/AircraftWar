@@ -11,11 +11,6 @@ import item.BloodItem
 
 import scala.collection.mutable.ListBuffer
 
-/** 普通敌机 不可射击
-  *
-  * @author
-  *   hitsz
-  */
 class EliteAircraft(
     _locationX: Int,
     _locationY: Int,
@@ -24,7 +19,7 @@ class EliteAircraft(
     _hp: Int
 ) extends EnemyAircraft(_locationX, _locationY, _speedX, _speedY, _hp) {
 
-    private var bullet_power = 2
+    private val bullet_power = 2
 
     private val direction: Int = 1
 

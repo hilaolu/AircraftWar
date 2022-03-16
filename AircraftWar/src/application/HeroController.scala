@@ -5,11 +5,6 @@ import java.awt.event.MouseEvent
 
 import aircraft.HeroAircraft
 
-/** 英雄机控制类 监听鼠标，控制英雄机的移动
-  *
-  * @author
-  *   hitsz
-  */
 object HeroController {
 
     def apply(game: Game, heroAircraft: HeroAircraft) = {
@@ -23,7 +18,7 @@ object HeroController {
                 if (
                   x < 0 || x > Main.WINDOW_WIDTH || y < 0 || y > Main.WINDOW_HEIGHT
                 ) {
-                    // 防止超出边界
+                    // out of canvas, do nothing
                 } else {
                     heroAircraft.setLocation(x, y)
                 }

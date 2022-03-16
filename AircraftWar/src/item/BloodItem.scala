@@ -4,11 +4,6 @@ import basic.AbstractFlyingObject
 import application.Main
 import aircraft.AbstractAircraft
 
-/** 子弹类。 也可以考虑不同类型的子弹
-  *
-  * @author
-  *   hitsz
-  */
 class BloodItem(
     _locationX: Int,
     _locationY: Int,

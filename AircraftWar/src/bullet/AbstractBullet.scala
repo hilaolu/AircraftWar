@@ -4,11 +4,6 @@ import basic.AbstractFlyingObject
 import application.Main
 import aircraft.AbstractAircraft
 
-/** 子弹类。 也可以考虑不同类型的子弹
-  *
-  * @author
-  *   hitsz
-  */
 abstract class AbstractBullet(
     _locationX: Int,
     _locationY: Int,
@@ -19,21 +14,21 @@ abstract class AbstractBullet(
     var power = 10
 
     def this(
-        locationX: Int,
-        locationY: Int,
-        speedX: Int,
-        speedY: Int,
-        power: Int
+        _locationX: Int,
+        _locationY: Int,
+        _speedX: Int,
+        _speedY: Int,
+        _power: Int
     ) = {
-        this(locationX, locationY, speedX, speedY)
-        this.power = power
+        this(_locationX, _locationY, _speedX, _speedY)
+        power = _power
     }
 
     def this(
-        power: Int
+        _power: Int
     ) = {
         this(0, 0, 0, 0)
-        this.power = power
+        power = _power
     }
 
     def setX(x: Int) = {

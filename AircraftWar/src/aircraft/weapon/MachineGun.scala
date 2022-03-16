@@ -17,23 +17,21 @@ class MachineGun {
         shoot_fatigue: Int = 0
     ): ListBuffer[AbstractBullet] = {
 
-        var res: ListBuffer[AbstractBullet] = new ListBuffer()
+        val res: ListBuffer[AbstractBullet] = new ListBuffer()
 
-        if (this.fatigue > 0) {
-            this.fatigue -= 1
+        if (fatigue > 0) {
+            fatigue -= 1
             return res
         } else {
-            this.fatigue = shoot_fatigue
+            fatigue = shoot_fatigue
         }
 
-        var speedX: Int = 0
+        val speedX: Int = 0
 
-        var speedY = speed
+        val speedY = speed
 
         for (i <- 0 until shootNum) {
-            // 子弹发射位置相对飞机位置向前偏移
-            // 多个子弹横向分散
-            var newBullet = bullet_factory()
+            val newBullet = bullet_factory()
             newBullet.setVX(speedX)
             newBullet.setVY(speedY * caller_direction)
             newBullet.setX(x + (i * 2 - shootNum + 1) * 10)

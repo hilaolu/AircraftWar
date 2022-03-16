@@ -19,7 +19,7 @@ class Sniper {
         shoot_fatigue: Int = 0
     ): ListBuffer[AbstractBullet] = {
 
-        var res: ListBuffer[AbstractBullet] = new ListBuffer()
+        val res: ListBuffer[AbstractBullet] = new ListBuffer()
 
         if (fatigue > 0) {
             fatigue -= 1
@@ -40,13 +40,11 @@ class Sniper {
         val dy = hero_y - y
         val dis = math.sqrt(dx * dx + dy * dy).toInt
 
-        var speedX: Int = speed * dx / dis
+        val speedX: Int = speed * dx / dis
 
-        var speedY: Int = speed * dy / dis
+        val speedY: Int = speed * dy / dis
 
-        // 子弹发射位置相对飞机位置向前偏移
-        // 多个子弹横向分散
-        var newBullet = bullet_factory()
+        val newBullet = bullet_factory()
         newBullet.setVX(speedX)
         newBullet.setVY(speedY)
         newBullet.setX(x)
