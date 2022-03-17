@@ -17,11 +17,6 @@ jobs:
         with:
           nix_path: nixpkgs=channel:nixos-unstable
 
-      - name: Install mill
-        uses: jodersky/setup-mill@master
-        with:
-          mill-version: 0.10.0
-
       - name: Build
         run: nix-shell --command 'mill __.compile' default.nix
           
