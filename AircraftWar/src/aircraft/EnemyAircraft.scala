@@ -19,7 +19,6 @@ abstract class EnemyAircraft extends AbstractAircraft {
 
     override def forward() = {
         super.forward()
-        // 判定 y 轴向下飞行出界
         if (locationY >= Main.WINDOW_HEIGHT) {
             vanish()
         }
