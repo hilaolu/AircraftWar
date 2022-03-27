@@ -9,6 +9,7 @@ import weapon._
 import basic.AbstractFlyingObject
 import application.ImageManager
 import application.Main
+import factory.BulletFactory
 
 object HeroAircraft extends AbstractAircraft {
     var locationX: Int = Main.WINDOW_WIDTH / 2
@@ -17,6 +18,7 @@ object HeroAircraft extends AbstractAircraft {
     var speedX: Int = 0
     var speedY: Int = 0
     var hp: Int = 100
+    override val maxHp: Int = hp
 
     private var shootNum: Int = 1
 
@@ -29,9 +31,10 @@ object HeroAircraft extends AbstractAircraft {
     }
 
     val weapon = new MachineGun
+    val bullet_factory = new BulletFactory("hero", 1)
     override def shoot() = {
         weapon(
-          () => new HeroBullet(1),
+          bullet_factory,
           getLocationX(),
           getLocationY(),
           direction,
