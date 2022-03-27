@@ -21,13 +21,7 @@ object Game extends JPanel {
 
     private val timeInterval = 40
 
-    private final var heroAircraft: HeroAircraft = new HeroAircraft(
-      Main.WINDOW_WIDTH / 2,
-      Main.WINDOW_HEIGHT - ImageManager.HERO_IMAGE.getHeight(),
-      0,
-      0,
-      100
-    )
+    private val heroAircraft = HeroAircraft
 
     private var enemyAircrafts: ListBuffer[AbstractAircraft] =
         new ListBuffer()
@@ -135,7 +129,7 @@ object Game extends JPanel {
 
     }
 
-    def getHero(): HeroAircraft = {
+    def getHero() = {
         heroAircraft
     }
 
@@ -201,10 +195,8 @@ object Game extends JPanel {
                             bullet.effect(enemyAircraft)
                         }
                         if (
-                          enemyAircraft
-                              .crash(heroAircraft) || heroAircraft.crash(
-                            enemyAircraft
-                          )
+                          enemyAircraft.crash(heroAircraft)
+                          || heroAircraft.crash(enemyAircraft)
                         ) {
                             enemyAircraft.vanish()
                             heroAircraft.decreaseHp(Integer.MAX_VALUE)

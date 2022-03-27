@@ -6,14 +6,17 @@ import bullet.AbstractBullet
 import bullet.HeroBullet
 
 import weapon._
+import basic.AbstractFlyingObject
+import application.ImageManager
+import application.Main
 
-class HeroAircraft(
-    var locationX: Int,
-    var locationY: Int,
-    var speedX: Int,
-    var speedY: Int,
-    var hp: Int
-) extends AbstractAircraft {
+object HeroAircraft extends AbstractAircraft {
+    var locationX: Int = Main.WINDOW_WIDTH / 2
+    var locationY: Int =
+        Main.WINDOW_HEIGHT - ImageManager.HERO_IMAGE.getHeight()
+    var speedX: Int = 0
+    var speedY: Int = 0
+    var hp: Int = 100
 
     private var shootNum: Int = 1
 
@@ -36,4 +39,10 @@ class HeroAircraft(
           power = power
         )
     }
+
+    override def getWidth(): Int = ImageManager.HERO_IMAGE.getWidth()
+
+    override def getHeight(): Int = ImageManager.HERO_IMAGE.getHeight()
+
+    // override def crash(o: AbstractFlyingObject): Boolean = false
 }
