@@ -10,6 +10,7 @@ import weapon._
 import item.BloodItem
 
 import scala.collection.mutable.ListBuffer
+import factory.ItemFactory
 
 class EliteEnemy(
     var locationX: Int,
@@ -40,13 +41,7 @@ class EliteEnemy(
     override def vanish(): Unit = {
         super.vanish()
 
-        val item = new BloodItem(
-          getLocationX(),
-          getLocationY(),
-          0,
-          5
-        )
-
+        val item = ItemFactory.spawn("blood", getLocationX(), getLocationY())
         application.Game.addItem(item)
     }
 }
