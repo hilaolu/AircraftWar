@@ -28,7 +28,7 @@ class EliteEnemy(
 
     override def shoot() = {
         weapon(
-          () => new EnemyBullet(1),
+          bullet_factory,
           getLocationX(),
           getLocationY(),
           direction,

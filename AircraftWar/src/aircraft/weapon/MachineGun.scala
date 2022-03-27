@@ -2,12 +2,13 @@ package aircraft.weapon
 
 import bullet._
 import scala.collection.mutable.ListBuffer
+import factory.BulletFactory
 
 class MachineGun {
     var fatigue: Int = 0
 
     def apply[T <: AbstractBullet](
-        bullet_factory: () => T,
+        bullet_factory: BulletFactory,
         x: Int,
         y: Int,
         caller_direction: Int,
@@ -31,7 +32,7 @@ class MachineGun {
         val speedY = speed
 
         for (i <- 0 until shootNum) {
-            val newBullet = bullet_factory()
+            val newBullet = bullet_factory.spawn()
             newBullet.setVX(speedX)
             newBullet.setVY(speedY * caller_direction)
             newBullet.setX(x + (i * 2 - shootNum + 1) * 10)

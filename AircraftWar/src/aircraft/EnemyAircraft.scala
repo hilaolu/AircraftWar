@@ -8,6 +8,7 @@ import bullet.EnemyBullet
 import weapon._
 
 import scala.collection.mutable.ListBuffer
+import factory.BulletFactory
 
 abstract class EnemyAircraft extends AbstractAircraft {
 
@@ -25,9 +26,11 @@ abstract class EnemyAircraft extends AbstractAircraft {
     }
 
     val weapon = new MachineGun
+
+    val bullet_factory = new BulletFactory("enemy", 1)
     def shoot() = {
         weapon(
-          () => new EnemyBullet(1),
+          bullet_factory,
           getLocationX(),
           getLocationY(),
           direction,

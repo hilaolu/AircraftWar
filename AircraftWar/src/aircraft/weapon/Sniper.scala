@@ -4,12 +4,13 @@ import bullet._
 import scala.collection.mutable.ListBuffer
 
 import basic.AbstractFlyingObject
+import factory.BulletFactory
 
 class Sniper {
     var fatigue: Int = 0
     var ammo: Int = 0
     def apply[T <: AbstractBullet](
-        bullet_factory: () => T,
+        bullet_factory: BulletFactory,
         x: Int,
         y: Int,
         caller_direction: Int,
@@ -45,7 +46,7 @@ class Sniper {
 
         val speedY: Int = speed * dy / dis
 
-        val newBullet = bullet_factory()
+        val newBullet = bullet_factory.spawn()
         newBullet.setVX(speedX)
         newBullet.setVY(speedY)
         newBullet.setX(x)
