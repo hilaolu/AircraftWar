@@ -39,7 +39,7 @@ abstract class EnemyAircraft extends AbstractAircraft {
 
     override def vanish(): Unit = {
         if (getHp() == 0) {
-            application.Main.game.addScore(score)
+            application.Game.addScore(score)
         }
         super.vanish()
     }

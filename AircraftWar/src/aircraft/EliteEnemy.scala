@@ -47,6 +47,6 @@ class EliteEnemy(
           5
         )
 
-        application.Main.game.addItem(item)
+        application.Game.addItem(item)
     }
 }

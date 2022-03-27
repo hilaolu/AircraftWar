@@ -34,7 +34,7 @@ class Sniper {
             }
         }
 
-        val hero = application.Main.game.getHero
+        val hero = application.Game.getHero
         val (hero_x, hero_y) = (hero.getLocationX, hero.getLocationY)
 
         val dx = hero_x - x

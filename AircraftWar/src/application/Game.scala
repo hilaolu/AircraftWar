@@ -15,7 +15,7 @@ import basic.AbstractFlyingObject
 import bullet.AbstractBullet
 import org.apache.commons.lang3.concurrent.BasicThreadFactory
 
-class Game extends JPanel {
+object Game extends JPanel {
 
     private var backGroundTop = 0
 

@@ -11,7 +11,7 @@ class BombItem(
     var speedY: Int
 ) extends AbstractItem {
 
-    def effect(o: Game): Unit = {
+    def effect(o: Game.type): Unit = {
         println("[Bomb Item Applied]")
     }
 }

@@ -28,8 +28,7 @@ object Main extends App {
         debug = true
     }
 
-    var game = new Game()
-    frame.add(game)
+    frame.add(Game)
     frame.setVisible(true)
-    game.action()
+    Game.action()
 }
