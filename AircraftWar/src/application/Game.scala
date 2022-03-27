@@ -15,6 +15,8 @@ import basic.AbstractFlyingObject
 import bullet.AbstractBullet
 import org.apache.commons.lang3.concurrent.BasicThreadFactory
 
+import factory._
+
 object Game extends JPanel {
 
     private var backGroundTop = 0
@@ -42,6 +44,8 @@ object Game extends JPanel {
     private var cycleDuration = 600
     private var cycleTime = 0
 
+    private val enemyFactory = EnemyFactory
+
     HeroController.apply(this, heroAircraft)
 
     private final var executorService: ScheduledExecutorService =
@@ -67,33 +71,13 @@ object Game extends JPanel {
                 if (timeCountAndNewCycleJudge()) {
                     if (enemyAircrafts.length < enemyMaxNumber) {
                         enemyAircrafts.addOne(
-                          new TrivialEnemy(
-                            (
-                              Math.random() * (Main.WINDOW_WIDTH - ImageManager.MOB_ENEMY_IMAGE
-                                  .getWidth())
-                            ).toInt * 1,
-                            (Math
-                                .random() * Main.WINDOW_HEIGHT * 0.2).toInt * 1,
-                            0,
-                            5,
-                            10
-                          )
+                          enemyFactory.spawn("t")
                         )
                     }
 
                     if (Events.EliteEvent()) {
                         enemyAircrafts.addOne(
-                          new EliteEnemy(
-                            (
-                              Math.random() * (Main.WINDOW_WIDTH - ImageManager.MOB_ENEMY_IMAGE
-                                  .getWidth())
-                            ).toInt * 1,
-                            (Math
-                                .random() * Main.WINDOW_HEIGHT * 0.2).toInt * 1,
-                            0,
-                            3,
-                            20
-                          )
+                          enemyFactory.spawn("e")
                         )
                     }
                     shootAction()
