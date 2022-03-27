@@ -18,5 +18,8 @@ jobs:
           nix_path: nixpkgs=channel:nixos-unstable
 
       - name: Build
-        run: nix-shell --command 'mill __.compile' default.nix
+        run: | 
+          nix develop
+          mill __.compile 
+
           
