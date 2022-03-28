@@ -6,7 +6,7 @@ object AircraftWar extends ScalaModule with ScalaMetalsSupport {
     def semanticDbVersion = "4.4.32"
 
     override def ivyDeps = Agg(
-      ivy"org.apache.commons:commons-lang3:3.1.+"
+      ivy"org.apache.commons:commons-lang3:3.12.+"
     )
 
 }
