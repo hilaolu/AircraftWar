@@ -1,0 +1,25 @@
+name: Style Check 
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+        - name: Checkout
+          uses: actions/checkout@v3
+
+        - name: scalastyle-download
+          uses: microsoft/scala-style-download@v1.0.0
+          with:
+            scalastyle-url: 'https://repo1.maven.org/maven2/org/scalastyle/scalastyle_2.12/1.0.0/scalastyle_2.12-1.0.0-batch.jar' # Default downloads version 2.12    
+
+        - name: scalastyle-validate
+          uses: microsoft/scalastyle-validate@v1.0.0
+          with:
+            scala-code-directory: './AircraftWar/src'
+            scalastye-config-directory: './.github/scalastyle/scalastyle_config.xml'
+            # scalastyle-directory: './path-to-scalastyle'
