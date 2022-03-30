@@ -7,8 +7,6 @@ import bullet.AbstractBullet
 import bullet.EnemyBullet
 import weapon._
 
-import item.BloodItem
-
 import scala.collection.mutable.ListBuffer
 import factory.ItemFactory
 
@@ -41,7 +39,11 @@ class EliteEnemy(
     override def vanish(): Unit = {
         super.vanish()
 
-        val item = ItemFactory.spawn("blood", getLocationX(), getLocationY())
+        val item = ItemFactory.spawn(
+          misc.typing.ItemType.BLOOD,
+          getLocationX(),
+          getLocationY()
+        )
         application.Game.addItem(item)
     }
 }

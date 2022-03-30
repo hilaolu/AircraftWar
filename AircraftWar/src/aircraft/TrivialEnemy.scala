@@ -7,6 +7,8 @@ import bullet.EnemyBullet
 
 import weapon._
 
+import factory.BulletFactory
+
 import scala.collection.mutable.ListBuffer
 
 class TrivialEnemy(

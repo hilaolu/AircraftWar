@@ -3,10 +3,12 @@ package factory
 import aircraft._
 import application.Main
 import application.ImageManager
+import misc.typing.EnemyType._
+import misc.typing.EnemyType
 
 object EnemyFactory {
-    def spawn(t: String, location: (Int, Int)): AbstractAircraft = {
-        if (t == "e") {
+    def spawn(t: EnemyType, location: (Int, Int)): AbstractAircraft = {
+        if (t == ELITE) {
             new EliteEnemy(
               location._1,
               location._2,
@@ -14,7 +16,7 @@ object EnemyFactory {
               3,
               20
             )
-        } else if (t == "t") {
+        } else if (t == TRIVIAL) {
             new TrivialEnemy(
               location._1,
               location._2,
@@ -22,7 +24,7 @@ object EnemyFactory {
               5,
               10
             )
-        } else if (t == "b") {
+        } else if (t == BOSS) {
             new BossEnemy(
               location._1,
               location._2,
@@ -31,11 +33,11 @@ object EnemyFactory {
               10
             )
         } else {
-            this.spawn("t", location)
+            this.spawn(TRIVIAL, location)
         }
     }
 
-    def spawn(t: String): AbstractAircraft = {
+    def spawn(t: EnemyType): AbstractAircraft = {
         val random_location = (
           (
             Math.random() * (Main.WINDOW_WIDTH - ImageManager.MOB_ENEMY_IMAGE

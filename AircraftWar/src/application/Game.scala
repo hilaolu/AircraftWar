@@ -15,6 +15,8 @@ import basic.AbstractFlyingObject
 import bullet.AbstractBullet
 import org.apache.commons.lang3.concurrent.BasicThreadFactory
 
+import misc.typing.EnemyType._
+
 import factory._
 
 object Game extends JPanel {
@@ -71,13 +73,13 @@ object Game extends JPanel {
                 if (timeCountAndNewCycleJudge()) {
                     if (enemyAircrafts.length < enemyMaxNumber) {
                         enemyAircrafts.addOne(
-                          enemyFactory.spawn("t")
+                          enemyFactory.spawn(TRIVIAL)
                         )
                     }
 
                     if (Events.EliteEvent()) {
                         enemyAircrafts.addOne(
-                          enemyFactory.spawn("e")
+                          enemyFactory.spawn(ELITE)
                         )
                     }
                     shootAction()

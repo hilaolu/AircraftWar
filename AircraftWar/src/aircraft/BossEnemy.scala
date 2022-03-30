@@ -27,7 +27,6 @@ class BossEnemy(
 
     val score = 30
 
-    override val bullet_factory = new BulletFactory("enemy", 1)
     override def shoot() = {
         weapon(
           bullet_factory,

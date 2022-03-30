@@ -4,9 +4,12 @@ import bullet.AbstractBullet
 import bullet.HeroBullet
 import bullet.EnemyBullet
 
+import misc.typing.AircraftType._
+import misc.typing._
+
 object BulletFactory {
-    def spawn(t: String, power: Int = 1): AbstractBullet = {
-        if (t == "hero") {
+    def spawn(t: AircraftType, power: Int = 1): AbstractBullet = {
+        if (t == HERO) {
             new HeroBullet(power)
         } else {
             new EnemyBullet(power)
@@ -14,10 +17,10 @@ object BulletFactory {
     }
 }
 
-class BulletFactory(t: String, var power: Int = 1) {
+class BulletFactory(t: AircraftType, var power: Int = 1) {
 
     def spawn(): AbstractBullet = {
-        if (t == "hero") {
+        if (t == HERO) {
             new HeroBullet(power)
         } else {
             new EnemyBullet(power)

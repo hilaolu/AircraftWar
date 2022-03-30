@@ -27,7 +27,7 @@ abstract class EnemyAircraft extends AbstractAircraft {
 
     val weapon = new MachineGun
 
-    val bullet_factory = new BulletFactory("enemy", 1)
+    val bullet_factory = new BulletFactory(misc.typing.AircraftType.ENEMY, 1)
     def shoot() = {
         weapon(
           bullet_factory,
