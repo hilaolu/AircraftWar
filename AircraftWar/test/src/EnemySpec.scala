@@ -32,4 +32,10 @@ class EnemyCollisionSpec extends AnyFlatSpec with should.Matchers {
             )
         enemy.crash(hero) should be(false)
     }
+
+    "EnemyAircraft" should "not vaild" in {
+        val enemy = EnemyFactory.spawn(TRIVIAL)
+        enemy.decreaseHp(114514)
+        enemy.isValid should be(false)
+    }
 }

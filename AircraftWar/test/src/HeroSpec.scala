@@ -33,4 +33,10 @@ class HeroCollisionSpec extends AnyFlatSpec with should.Matchers {
         hero.crash(enemy) should be(false)
     }
 
+    "HeroAircraft" should "not vaild" in {
+        val hero = HeroAircraft
+        hero.decreaseHp(114514)
+        hero.isValid should be(false)
+    }
+
 }
