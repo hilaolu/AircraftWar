@@ -9,4 +9,11 @@ object AircraftWar extends ScalaModule with ScalaMetalsSupport {
       ivy"org.apache.commons:commons-lang3:3.12.+"
     )
 
+    object test extends Tests {
+        def ivyDeps = Agg(
+          ivy"org.scalactic::scalactic:3.1.1",
+          ivy"org.scalatest::scalatest:3.1.1"
+        )
+        def testFrameworks = Seq("org.scalatest.tools.Framework")
+    }
 }
