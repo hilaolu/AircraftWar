@@ -34,4 +34,17 @@ class BulletCollisionSpec extends AnyFlatSpec with should.Matchers {
             )
         enemy.crash(bullet) should be(false)
     }
+
+    "HeroBullet" should "forward" in {
+        val bullet_factory = new BulletFactory(AircraftType.HERO)
+        val bullet = bullet_factory.spawn()
+        bullet.setVX(1)
+        bullet.setVY(2)
+        val getBulletLocation =
+            () => (bullet.getLocationX(), bullet.getLocationY())
+        val old_location = getBulletLocation()
+        bullet.forward()
+        getBulletLocation()._1 should be(old_location._1 + 1)
+        getBulletLocation()._2 should be(old_location._2 + 2)
+    }
 }
