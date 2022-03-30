@@ -20,10 +20,6 @@ object BulletFactory {
 class BulletFactory(t: AircraftType, var power: Int = 1) {
 
     def spawn(): AbstractBullet = {
-        if (t == HERO) {
-            new HeroBullet(power)
-        } else {
-            new EnemyBullet(power)
-        }
+        BulletFactory.spawn(t, power)
     }
 }
