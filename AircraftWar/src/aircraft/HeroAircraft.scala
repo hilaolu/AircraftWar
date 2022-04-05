@@ -31,7 +31,7 @@ object HeroAircraft extends AbstractAircraft {
     }
 
     val weapon = new MachineGun
-    val bullet_factory = new BulletFactory(misc.typing.AircraftType.HERO, 1)
+    val bullet_factory = BulletFactory(misc.typing.AircraftType.HERO, 1)
     override def shoot() = {
         weapon(
           bullet_factory,
