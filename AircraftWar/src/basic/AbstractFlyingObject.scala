@@ -38,7 +38,7 @@ abstract class AbstractFlyingObject {
         val fWidth: Int = flyingObject.getWidth()
         val fHeight: Int = flyingObject.getHeight()
 
-        return x + (fWidth + this
+        x + (fWidth + this
             .getWidth()) / 2 > locationX && x - (fWidth + this
             .getWidth()) / 2 < locationX && y + (fHeight / fFactor + this
             .getHeight() / factor) / 2 > locationY && y - (fHeight / fFactor + this
