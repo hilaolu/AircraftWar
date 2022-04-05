@@ -8,32 +8,33 @@ import misc.typing.EnemyType
 
 object EnemyFactory {
     def spawn(t: EnemyType, location: (Int, Int)): AbstractAircraft = {
-        if (t == ELITE) {
-            new EliteEnemy(
-              location._1,
-              location._2,
-              0,
-              3,
-              20
-            )
-        } else if (t == TRIVIAL) {
-            new TrivialEnemy(
-              location._1,
-              location._2,
-              0,
-              5,
-              10
-            )
-        } else if (t == BOSS) {
-            new BossEnemy(
-              location._1,
-              location._2,
-              0,
-              5,
-              10
-            )
-        } else {
-            this.spawn(TRIVIAL, location)
+        t match {
+            case ELITE =>
+                new EliteEnemy(
+                  location._1,
+                  location._2,
+                  0,
+                  3,
+                  20
+                )
+            case TRIVIAL =>
+                new TrivialEnemy(
+                  location._1,
+                  location._2,
+                  0,
+                  5,
+                  10
+                )
+            case BOSS =>
+                new BossEnemy(
+                  location._1,
+                  location._2,
+                  0,
+                  5,
+                  10
+                )
+            case _ =>
+                this.spawn(TRIVIAL, location)
         }
     }
 

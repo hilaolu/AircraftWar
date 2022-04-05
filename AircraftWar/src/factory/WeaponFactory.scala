@@ -11,10 +11,9 @@ object WeaponFactory {
     def spawn(
         t: WeaponType
     ): AbstractWeapon = {
-        if (t == WeaponType.SNIPER) {
-            new Sniper()
-        } else {
-            new MachineGun()
+        t match {
+            case WeaponType.SNIPER => new Sniper()
+            case _                 => new MachineGun()
         }
     }
 }
