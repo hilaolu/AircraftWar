@@ -38,7 +38,9 @@ class HeroCollisionSpec extends AnyFlatSpec with should.Matchers {
         hero.decreaseHp(114514)
         hero.isValid should be(false)
     }
+}
 
+class HeroForwardSpec extends AnyFlatSpec with should.Matchers {
     "HeroAircraft" should "not forward" in {
         val hero = HeroAircraft
         val getHeroLocation = () => (hero.getLocationX(), hero.getLocationY())
@@ -46,5 +48,4 @@ class HeroCollisionSpec extends AnyFlatSpec with should.Matchers {
         hero.forward()
         getHeroLocation() should be(old_location)
     }
-
 }
