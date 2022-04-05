@@ -1,5 +1,4 @@
 package test
-package test
 import org.scalatest._
 import flatspec._
 import matchers._
@@ -10,19 +9,24 @@ import factory.BulletFactory
 import misc.typing.EnemyType._
 import misc.typing._
 import application.Game
+import factory.WeaponFactory
 
-// class ItemEffectSpec extends AnyFlatSpec with should.Matchers {
-//     "Blood" should "increase hp then vanish" in {
-//         val game = Game
-//         val hero = game.getHero()
-//         hero.decreaseHp(114514)
-//         val blood = ItemFactory.spawn(
-//           ItemType.BLOOD,
-//           hero.getLocationX(),
-//           hero.getLocationY()
-//         )
-//         blood.effect(game)
-//         blood.isValid() should be(false)
-//         hero.getHp() should be(30) // may change?
-//     }
-// }
+import misc.typing.WeaponType.MACHINEGUN
+
+class WeaponSpec extends AnyFlatSpec with should.Matchers {
+    "Weapon" should "shoot" in {
+        val weapon = WeaponFactory.spawn(MACHINEGUN)
+        val bullet_factory = BulletFactory(AircraftType.HERO)
+        for (i <- 1 until 6) {
+            weapon
+                .apply(
+                  bullet_factory,
+                  0,
+                  0,
+                  1,
+                  shootNum = i
+                )
+                .length should be(i)
+        }
+    }
+}
