@@ -6,7 +6,7 @@ import scala.collection.mutable.ListBuffer
 import basic.AbstractFlyingObject
 import factory.BulletFactory
 
-class Sniper {
+class Sniper extends AbstractWeapon {
     var fatigue: Int = 0
     var ammo: Int = 0
     def apply[T <: AbstractBullet](

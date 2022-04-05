@@ -9,6 +9,9 @@ import weapon._
 
 import scala.collection.mutable.ListBuffer
 import factory.BulletFactory
+import factory.WeaponFactory
+
+import misc.typing.WeaponType.MACHINEGUN
 
 abstract class EnemyAircraft extends AbstractAircraft {
 
@@ -25,7 +28,7 @@ abstract class EnemyAircraft extends AbstractAircraft {
         }
     }
 
-    val weapon = new MachineGun
+    val weapon = WeaponFactory.spawn(MACHINEGUN)
 
     val bullet_factory = BulletFactory(misc.typing.AircraftType.ENEMY, 1)
     def shoot() = {

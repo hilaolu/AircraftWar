@@ -4,7 +4,7 @@ import bullet._
 import scala.collection.mutable.ListBuffer
 import factory.BulletFactory
 
-class MachineGun {
+class MachineGun extends AbstractWeapon {
     var fatigue: Int = 0
 
     def apply[T <: AbstractBullet](

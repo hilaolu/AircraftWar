@@ -15,6 +15,10 @@ object BulletFactory {
             new EnemyBullet(power)
         }
     }
+
+    def apply(t: AircraftType, power: Int = 1): BulletFactory = {
+        new BulletFactory(t, power)
+    }
 }
 
 class BulletFactory(t: AircraftType, var power: Int = 1) {

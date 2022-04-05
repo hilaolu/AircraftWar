@@ -5,11 +5,12 @@ import scala.collection.mutable.ListBuffer
 import bullet.AbstractBullet
 import bullet.HeroBullet
 
-import weapon._
+import misc.typing.WeaponType.MACHINEGUN
 import basic.AbstractFlyingObject
 import application.ImageManager
 import application.Main
 import factory.BulletFactory
+import factory.WeaponFactory
 
 object HeroAircraft extends AbstractAircraft {
     var locationX: Int = Main.WINDOW_WIDTH / 2
@@ -30,7 +31,7 @@ object HeroAircraft extends AbstractAircraft {
         // null function
     }
 
-    val weapon = new MachineGun
+    val weapon = WeaponFactory.spawn(MACHINEGUN)
     val bullet_factory = BulletFactory(misc.typing.AircraftType.HERO, 1)
     override def shoot() = {
         weapon(
