@@ -18,6 +18,9 @@ import org.apache.commons.lang3.concurrent.BasicThreadFactory
 import misc.typing.EnemyType._
 
 import factory._
+import aircraft.weapon.MachineGun
+import aircraft.weapon.Sniper
+import aircraft.weapon.ShotGun
 
 object Game extends JPanel {
 
@@ -299,6 +302,10 @@ object Game extends JPanel {
         val s5: Option[BloodItem] = None
         val s6: Option[BombItem] = None
         val s7: Option[BulletItem] = None
+        val s8: Option[MachineGun] = None
+        val s9: Option[Sniper] = None
+        val s10: Option[ShotGun] = None
+        val s11: Option[DAO] = None
     }
 
 }
