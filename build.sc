@@ -6,7 +6,8 @@ object AircraftWar extends ScalaModule with ScalaMetalsSupport {
     def semanticDbVersion = "4.4.32"
 
     override def ivyDeps = Agg(
-      ivy"org.apache.commons:commons-lang3:3.12.+"
+      ivy"org.apache.commons:commons-lang3:3.12.+",
+      ivy"com.github.tototoshi::scala-csv:1.3.10"
     )
 
     object test extends Tests with TestModule.ScalaTest {

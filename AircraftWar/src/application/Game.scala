@@ -101,6 +101,8 @@ object Game extends JPanel {
                     executorService.shutdown()
                     gameOverFlag = true
                     System.out.println("Game Over!")
+                    ScoreBoard.insert(score)
+                    ScoreBoard.print()
                 }
 
             }

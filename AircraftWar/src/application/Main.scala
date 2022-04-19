@@ -30,5 +30,6 @@ object Main extends App {
 
     frame.add(Game)
     frame.setVisible(true)
+    ScoreBoard.init()
     Game.action()
 }

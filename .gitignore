@@ -1,4 +1,5 @@
 .direnv/**
+*.csv
 # IDEA dir
 .bloop/**
 .metals/**
