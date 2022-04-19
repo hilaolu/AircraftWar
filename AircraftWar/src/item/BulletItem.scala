@@ -3,6 +3,9 @@ package item
 import basic.AbstractFlyingObject
 import application.Game
 import aircraft.AbstractAircraft
+import factory.WeaponFactory
+
+import misc.typing.WeaponType.SHOTGUN
 
 class BulletItem(
     var locationX: Int,
@@ -12,6 +15,8 @@ class BulletItem(
 ) extends AbstractItem {
 
     def effect(o: Game.type): Unit = {
-        println("[Bullet Item Applied]")
+        o.getHero().setWeapon(WeaponFactory.spawn(SHOTGUN))
+        o.getHero().setShootNum(o.getHero().getShootNum() + 1)
+        vanish()
     }
 }

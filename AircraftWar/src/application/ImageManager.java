@@ -56,8 +56,8 @@ public class ImageManager {
 			CLASSNAME_IMAGE_MAP.put(EnemyBullet.class.getName(), ENEMY_BULLET_IMAGE);
 
 			CLASSNAME_IMAGE_MAP.put(BloodItem.class.getName(), BLOOD_ITEM_IMAGE);
-			CLASSNAME_IMAGE_MAP.put(BombItem.class.getName(), BLOOD_ITEM_IMAGE);
-			CLASSNAME_IMAGE_MAP.put(BulletItem.class.getName(), BLOOD_ITEM_IMAGE);
+			CLASSNAME_IMAGE_MAP.put(BombItem.class.getName(), BOMB_ITEM_IMAGE);
+			CLASSNAME_IMAGE_MAP.put(BulletItem.class.getName(), BULLET_ITEM_IMAGE);
 
 		} catch (IOException e) {
 			e.printStackTrace();

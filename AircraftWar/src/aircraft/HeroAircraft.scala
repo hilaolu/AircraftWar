@@ -40,9 +40,15 @@ object HeroAircraft extends AbstractAircraft {
           getLocationX(),
           getLocationY(),
           direction,
-          shootNum = 2,
+          shootNum = shootNum,
           power = power
         )
+    }
+
+    def getShootNum(): Int = shootNum
+
+    def setShootNum(num: Int) = {
+        this.shootNum = num
     }
 
     override def getWidth(): Int = ImageManager.HERO_IMAGE.getWidth()
