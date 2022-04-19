@@ -63,6 +63,12 @@ object Game extends JPanel {
         items.addOne(item)
     }
 
+    def spawnEnemy(e: misc.typing.EnemyType.EnemyType) {
+        enemyAircrafts.addOne(
+          enemyFactory.spawn(e)
+        )
+    }
+
     def action() = {
 
         object task extends Runnable {
@@ -84,6 +90,8 @@ object Game extends JPanel {
                     }
                     shootAction()
                 }
+
+                Events.poll(Game)
 
                 bulletsMoveAction()
 
@@ -119,6 +127,14 @@ object Game extends JPanel {
 
     def getHero() = {
         heroAircraft
+    }
+
+    def getScore() = {
+        score
+    }
+
+    def hasBoss(): Boolean = {
+        enemyAircrafts.map(a => a.isInstanceOf[BossEnemy]).reduce(_ | _)
     }
 
     def addScore(adder: Int) = {

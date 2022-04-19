@@ -29,8 +29,8 @@ object EnemyFactory {
                 new BossEnemy(
                   location._1,
                   location._2,
+                  2,
                   0,
-                  5,
                   10
                 )
             case _ =>

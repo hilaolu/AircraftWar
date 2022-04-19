@@ -12,6 +12,7 @@ import item.BloodItem
 import scala.collection.mutable.ListBuffer
 
 import factory.BulletFactory
+import factory.WeaponFactory
 
 class BossEnemy(
     var locationX: Int,
@@ -27,6 +28,8 @@ class BossEnemy(
 
     val score = 30
 
+    weapon = WeaponFactory.spawn(misc.typing.WeaponType.SNIPER)
+
     override def shoot() = {
         weapon(
           bullet_factory,
@@ -35,7 +38,7 @@ class BossEnemy(
           direction,
           7,
           shootNum = 6,
-          shoot_fatigue = 30
+          shoot_fatigue = 5
         )
     }
 
