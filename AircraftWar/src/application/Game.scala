@@ -306,6 +306,8 @@ object Game extends JPanel {
         val s9: Option[Sniper] = None
         val s10: Option[ShotGun] = None
         val s11: Option[DAO] = None
+        val scoreboard = ScoreBoard
+        val driver = CSVDriver
     }
 
 }
