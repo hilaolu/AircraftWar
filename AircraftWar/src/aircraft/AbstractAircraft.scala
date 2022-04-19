@@ -34,4 +34,8 @@ abstract class AbstractAircraft extends AbstractFlyingObject {
 
     def shoot(): ListBuffer[AbstractBullet]
 
+    def setWeapon(weapon: AbstractWeapon) = {
+        this.weapon = weapon
+    }
+
 }
