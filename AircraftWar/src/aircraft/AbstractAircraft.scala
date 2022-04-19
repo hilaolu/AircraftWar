@@ -4,11 +4,18 @@ import scala.collection.mutable.ListBuffer
 
 import basic.AbstractFlyingObject
 import bullet.AbstractBullet
+import aircraft.weapon.AbstractWeapon
+
+import misc.typing.WeaponType.MACHINEGUN
+
+import factory.WeaponFactory
 
 abstract class AbstractAircraft extends AbstractFlyingObject {
 
     var hp: Int
     val maxHp: Int = hp
+
+    var weapon: AbstractWeapon = WeaponFactory.spawn(MACHINEGUN)
 
     def decreaseHp(decrease: Int) = {
         hp -= decrease

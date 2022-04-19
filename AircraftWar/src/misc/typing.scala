@@ -17,5 +17,5 @@ object ItemType extends Enumeration {
 
 object WeaponType extends Enumeration {
     type WeaponType = Value
-    val SNIPER, MACHINEGUN = Value
+    val SNIPER, MACHINEGUN, SHOTGUN = Value
 }

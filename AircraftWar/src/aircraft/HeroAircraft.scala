@@ -6,11 +6,13 @@ import bullet.AbstractBullet
 import bullet.HeroBullet
 
 import misc.typing.WeaponType.MACHINEGUN
+import misc.typing.WeaponType.SHOTGUN
 import basic.AbstractFlyingObject
 import application.ImageManager
 import application.Main
 import factory.BulletFactory
 import factory.WeaponFactory
+import aircraft.weapon.ShotGun
 
 object HeroAircraft extends AbstractAircraft {
     var locationX: Int = Main.WINDOW_WIDTH / 2
@@ -31,7 +33,6 @@ object HeroAircraft extends AbstractAircraft {
         // null function
     }
 
-    val weapon = WeaponFactory.spawn(MACHINEGUN)
     val bullet_factory = BulletFactory(misc.typing.AircraftType.HERO, 1)
     override def shoot() = {
         weapon(
