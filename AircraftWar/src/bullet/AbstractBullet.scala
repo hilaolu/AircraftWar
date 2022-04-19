@@ -29,8 +29,8 @@ abstract class AbstractBullet extends AbstractFlyingObject with Effect {
     }
 
     override def forward() = {
-        super.forward()
-
+        locationX += speedX
+        locationY += speedY
         if (isOutOfCanvas) {
             vanish()
         }
