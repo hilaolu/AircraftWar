@@ -66,7 +66,7 @@ object Game extends JPanel {
         items.addOne(item)
     }
 
-    def spawnEnemy(e: misc.typing.EnemyType.EnemyType) {
+    def spawnEnemy(e: misc.typing.EnemyType.EnemyType) = {
         enemyAircrafts.addOne(
           enemyFactory.spawn(e)
         )
@@ -119,8 +119,17 @@ object Game extends JPanel {
             }
         }
 
+        val bgm = new MusicThread("bgm.wav")
+
         executorService.scheduleWithFixedDelay(
           task,
+          timeInterval,
+          timeInterval,
+          TimeUnit.MILLISECONDS
+        )
+
+        executorService.scheduleWithFixedDelay(
+          bgm,
           timeInterval,
           timeInterval,
           TimeUnit.MILLISECONDS
