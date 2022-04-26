@@ -39,6 +39,7 @@ public class MusicThread extends Thread {
 			}
 
 			if (selectedMixer == null) {
+				System.out.print("No supported Mixer, MusicThread Exit\n");
 				return;
 			}
 
