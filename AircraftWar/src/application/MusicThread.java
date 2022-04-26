@@ -20,8 +20,29 @@ public class MusicThread extends Thread {
 		try {
 			// 定义一个 AudioInputStream 用于接收输入的音频数据，使用 AudioSystem 来获取音频的音频输入流
 			String path = "AircraftWar/resources/sounds/";
+
 			AudioInputStream stream2 = AudioSystem.getAudioInputStream(new File(path + filename));
-			Clip clip = AudioSystem.getClip();
+
+			AudioInputStream audioInputStream = stream2;
+			AudioFormat format = audioInputStream.getFormat();
+			DataLine.Info lineInfo = new DataLine.Info(Clip.class, format);
+
+			Mixer.Info selectedMixer = null;
+
+			for (Mixer.Info mixerInfo : AudioSystem.getMixerInfo()) {
+				Mixer mixer = AudioSystem.getMixer(mixerInfo);
+				if (mixer.isLineSupported(lineInfo)) {
+					System.out.print(mixerInfo);
+					selectedMixer = mixerInfo;
+					break;
+				}
+			}
+
+			if (selectedMixer == null) {
+				return;
+			}
+
+			Clip clip = AudioSystem.getClip(selectedMixer);
 			clip.open(stream2);
 			stream2.close();
 			timeMs = clip.getMicrosecondLength();
