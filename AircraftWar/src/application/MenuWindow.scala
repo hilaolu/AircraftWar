@@ -5,7 +5,7 @@ import scala.swing.event._
 import java.awt
 
 object MenuWindow extends MainFrame {
-    title = "My Frame"
+    title = "Difficulty Select"
     contents = new GridPanel(2, 2) {
         hGap = 3
         vGap = 3
@@ -31,6 +31,15 @@ object MenuWindow extends MainFrame {
                 gameStart()
             }
         }
+
+        // contents += new ComboBox(List(1, 2, 3, 4))
+        val sound = new CheckBox("Sound") {
+            reactions += { case ButtonClicked(x) =>
+                MusicController.enable = x.selected
+            }
+        }
+
+        contents += sound
 
         // contents += new Button {
         //     text = "Ranking"
