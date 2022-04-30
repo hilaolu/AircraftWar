@@ -55,7 +55,7 @@ object RankingWindow extends MainFrame {
         table.selection.elementMode = Table.ElementMode.Row
     }
 
-    title = "Table Selection"
+    title = "Ranking"
     contents = ui
 
 }
