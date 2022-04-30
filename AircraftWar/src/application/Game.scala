@@ -115,6 +115,8 @@ object Game extends JPanel {
                     executorService.shutdown()
                     gameOverFlag = true
                     System.out.println("Game Over!")
+                    MusicController.stopBGM()
+                    MusicController.gameOver()
                     Main.frame.setVisible(false)
                     NameWindow()
                 }
