@@ -8,6 +8,7 @@ import factory.WeaponFactory
 import misc.typing.WeaponType.SHOTGUN
 
 import application.{CornJob, Command}
+import application.MusicController
 
 class CancelBullet extends Command {
     def execute() = {
@@ -26,6 +27,7 @@ class BulletItem(
 
     def effect(o: Game.type): Unit = {
         // o.getHero().setWeapon(WeaponFactory.spawn(SHOTGUN))
+        MusicController.supply()
         o.getHero().setShootNum(o.getHero().getShootNum() + 1)
         o.getHero().incBulletNum()
         application.CornJob(new CancelBullet, 2000)

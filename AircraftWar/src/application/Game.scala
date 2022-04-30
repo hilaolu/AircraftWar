@@ -124,6 +124,8 @@ object Game extends JPanel {
 
         // val bgm = new MusicThread("bgm.wav")
 
+        MusicController.playBGM()
+
         executorService.scheduleWithFixedDelay(
           task,
           timeInterval,

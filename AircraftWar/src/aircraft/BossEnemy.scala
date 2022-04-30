@@ -13,6 +13,7 @@ import scala.collection.mutable.ListBuffer
 
 import factory.BulletFactory
 import factory.WeaponFactory
+import application.MusicController
 
 class BossEnemy(
     var locationX: Int,
@@ -40,6 +41,15 @@ class BossEnemy(
           shootNum = 6,
           shoot_fatigue = 5
         )
+    }
+
+    override def vanish(): Unit = {
+        if (getHp() == 0) {
+            application.Game.addScore(score)
+        }
+        MusicController.stopBossBGM()
+        MusicController.playBGM()
+        super.vanish()
     }
 
 }

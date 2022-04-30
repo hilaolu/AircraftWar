@@ -1,6 +1,7 @@
 package bullet
 
 import aircraft.AbstractAircraft
+import application.MusicController
 
 class HeroBullet(
     var locationX: Int,
@@ -14,6 +15,7 @@ class HeroBullet(
     }
 
     override def effect[T <: AbstractAircraft](o: T): Unit = {
+        MusicController.hit()
         o.decreaseHp(power)
         vanish()
     }

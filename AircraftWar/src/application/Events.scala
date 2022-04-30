@@ -26,6 +26,8 @@ object Events {
         if (g.getScore() >= next_boss_checkpoint) {
             // spawn boss
             if (!g.hasBoss()) {
+                MusicController.stopBGM()
+                MusicController.playBossBGM()
                 g.spawnEnemy(misc.typing.EnemyType.BOSS)
             }
             next_boss_checkpoint += BOSSTHRESHOLD
