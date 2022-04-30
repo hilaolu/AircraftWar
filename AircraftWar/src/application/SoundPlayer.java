@@ -79,12 +79,15 @@ public class SoundPlayer implements Runnable {
 				int readBytes = -1;
 
 				while (((readBytes = sampleStream.read(bufferBytes)) != -1) && !exit) {
-					while (!play | exit) {
+					while (!play & !exit) {
+						Thread.sleep(250);
 					}
 					theAudioLine.write(bufferBytes, 0, readBytes);
 				}
 
-				exit = exit & !loop;
+				if (!loop) {
+					exit = true;
+				}
 
 				theAudioLine.drain();
 				theAudioLine.close();
