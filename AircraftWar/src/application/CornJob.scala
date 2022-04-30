@@ -13,6 +13,7 @@ object CornJob {
             }
         }
 
-        new Thread(new Job).start
+        val pid = new Thread(new Job).start
+
     }
 }

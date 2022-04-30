@@ -122,7 +122,7 @@ object Game extends JPanel {
             }
         }
 
-        val bgm = new MusicThread("bgm.wav")
+        // val bgm = new MusicThread("bgm.wav")
 
         executorService.scheduleWithFixedDelay(
           task,
@@ -131,12 +131,12 @@ object Game extends JPanel {
           TimeUnit.MILLISECONDS
         )
 
-        executorService.scheduleWithFixedDelay(
-          bgm,
-          timeInterval,
-          timeInterval,
-          TimeUnit.MILLISECONDS
-        )
+        // executorService.scheduleWithFixedDelay(
+        //   bgm,
+        //   timeInterval,
+        //   timeInterval,
+        //   TimeUnit.MILLISECONDS
+        // )
 
     }
 

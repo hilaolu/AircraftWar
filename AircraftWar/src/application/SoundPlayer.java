@@ -11,41 +11,87 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.sound.sampled.SourceDataLine;
 
-public class SoundPlayer {
+public class SoundPlayer implements Runnable {
 
 	// defining the byte buffer
 	private static final int BUFFER_SIZE = 4096;
 
-	static void play(String filePath) {
-		File soundFile = new File(filePath);
+	private boolean exit = false;
+	private boolean loop = false;
+	private boolean play = false;
+	Thread t;
+	File soundFile;
+
+	SoundPlayer(String fileName, boolean loop) {
+		soundFile = new File(fileName);
+		t = new Thread(this, fileName);
+		System.out.println("New thread: " + t);
+		exit = false;
+		this.loop = loop;
+		t.start();
+	}
+
+	SoundPlayer(String fileName) {
+		this(fileName, false);
+	}
+
+	void exit() {
+		exit = true;
+	}
+
+	void play() {
+		play = true;
+	}
+
+	void stop() {
+		play = false;
+	}
+
+	void play(String filePath) {
+	}
+
+	public void run() {
+
+		// if (AudioSystem.getMixerInfo().len() == 0) {
+		// return;
+		// }
+
 		try {
 			// convering the audio file to a stream
-			AudioInputStream sampleStream = AudioSystem.getAudioInputStream(soundFile);
 
-			AudioFormat formatAudio = sampleStream.getFormat();
+			while (!exit) {
 
-			DataLine.Info info = new DataLine.Info(SourceDataLine.class, formatAudio);
+				AudioInputStream sampleStream = AudioSystem.getAudioInputStream(soundFile);
 
-			SourceDataLine theAudioLine = (SourceDataLine) AudioSystem.getLine(info);
+				AudioFormat formatAudio = sampleStream.getFormat();
 
-			theAudioLine.open(formatAudio);
+				DataLine.Info info = new DataLine.Info(SourceDataLine.class, formatAudio);
 
-			theAudioLine.start();
+				SourceDataLine theAudioLine = (SourceDataLine) AudioSystem.getLine(info);
 
-			System.out.println("Audio Player Started.");
+				theAudioLine.open(formatAudio);
 
-			byte[] bufferBytes = new byte[BUFFER_SIZE];
-			int readBytes = -1;
+				theAudioLine.start();
 
-			while ((readBytes = sampleStream.read(bufferBytes)) != -1) {
-				theAudioLine.write(bufferBytes, 0, readBytes);
+				System.out.println("Audio Player Started.");
+
+				byte[] bufferBytes = new byte[BUFFER_SIZE];
+				int readBytes = -1;
+
+				while (((readBytes = sampleStream.read(bufferBytes)) != -1) && !exit) {
+					while (!play | exit) {
+					}
+					theAudioLine.write(bufferBytes, 0, readBytes);
+				}
+
+				exit = exit & !loop;
+
+				theAudioLine.drain();
+				theAudioLine.close();
+				sampleStream.close();
+
+				System.out.println("Playback has been finished.");
 			}
-
-			theAudioLine.drain();
-			theAudioLine.close();
-			sampleStream.close();
-
-			System.out.println("Playback has been finished.");
 
 		} catch (UnsupportedAudioFileException e) {
 			System.out.println("Unsupported file.");
@@ -56,6 +102,8 @@ public class SoundPlayer {
 		} catch (IOException e) {
 			System.out.println("Experienced an error.");
 			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("Experienced an error.");
 		}
 	}
 
