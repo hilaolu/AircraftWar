@@ -9,7 +9,6 @@ object CornJob {
         class Job extends Runnable {
             override def run() = {
                 Thread.sleep(time)
-                print("execute!\n")
                 command.execute()
             }
         }
