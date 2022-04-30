@@ -29,7 +29,7 @@ object HeroAircraft extends AbstractAircraft {
 
     private val direction: Int = -1
 
-    override def forward() {
+    override def forward() = {
         // null function
     }
 
@@ -49,6 +49,20 @@ object HeroAircraft extends AbstractAircraft {
 
     def setShootNum(num: Int) = {
         this.shootNum = num
+    }
+
+    var bullet_num = 0
+
+    def incBulletNum() = {
+        bullet_num += 1;
+        weapon = WeaponFactory.spawn(SHOTGUN)
+    }
+
+    def decBulletNum() = {
+        bullet_num -= 1;
+        if (bullet_num == 0) {
+            weapon = WeaponFactory.spawn(MACHINEGUN)
+        }
     }
 
     override def getWidth(): Int = ImageManager.HERO_IMAGE.getWidth()

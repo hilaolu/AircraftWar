@@ -21,6 +21,7 @@ import factory._
 import aircraft.weapon.MachineGun
 import aircraft.weapon.Sniper
 import aircraft.weapon.ShotGun
+import java.util.jar.Attributes.Name
 
 object Game extends JPanel {
 
@@ -112,8 +113,8 @@ object Game extends JPanel {
                     executorService.shutdown()
                     gameOverFlag = true
                     System.out.println("Game Over!")
-                    ScoreBoard.insert(score)
-                    ScoreBoard.print()
+                    Main.frame.setVisible(false)
+                    NameWindow()
                 }
 
             }

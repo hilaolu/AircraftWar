@@ -7,9 +7,9 @@ import java.io.FileNotFoundException
 import com.github.tototoshi.csv.CSVWriter
 
 trait DAO {
-    def getAll(): List[Score]
-    def getOne(index: Int): Score
-    def insert(s: Score)
+    def getAll(): List[List[String]]
+    def getOne(index: Int): List[String]
+    def insert(s: List[String])
     def delete(index: Int)
 }
 
@@ -36,11 +36,19 @@ object ScoreBoard {
         CSVDriver.init()
     }
 
-    def insert(score: Int) = {
-        CSVDriver.insert(new Score(score))
+    def insert(query: List[String]) = {
+        CSVDriver.insert(query)
     }
 
     def print() = {
-        CSVDriver.getAll().zipWithIndex.foreach(println)
+        // CSVDriver.getAll().zipWithIndex.foreach(println)
+    }
+
+    def delete(index: Int) = {
+        CSVDriver.delete(index)
+    }
+
+    def getAll(): List[List[String]] = {
+        CSVDriver.getAll()
     }
 }

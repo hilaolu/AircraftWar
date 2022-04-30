@@ -5,7 +5,7 @@ import javax.swing._
 
 import application.Game
 
-object Main extends App {
+object GameWindow {
 
     val WINDOW_WIDTH = 512
     val WINDOW_HEIGHT = 768
@@ -23,14 +23,8 @@ object Main extends App {
     )
     frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE)
 
-    if (args.length != 0 && args(0) == "--debug") {
-        println("[DEBUG ON]")
-        debug = true
-    }
-
-    MenuWindow.visible = true
-
     frame.add(Game)
+    frame.setVisible(true)
     ScoreBoard.init()
-
+    Game.action()
 }

@@ -7,7 +7,9 @@ object AircraftWar extends ScalaModule with ScalaMetalsSupport {
 
     override def ivyDeps = Agg(
       ivy"org.apache.commons:commons-lang3:3.12.+",
-      ivy"com.github.tototoshi::scala-csv:1.3.10"
+      ivy"com.github.tototoshi::scala-csv:1.3.10",
+      ivy"org.scala-lang.modules::scala-swing:3.0.+",
+      ivy"org.scala-lang:scala-library:2.13.8"
     )
 
     object test extends Tests with TestModule.ScalaTest {

@@ -12,7 +12,7 @@ object Events {
     }
 
     def EliteEvent(): Boolean = {
-        RandomInt() % 20 == 1
+        RandomInt() % 5 == 1
     }
 
     def RandomInt(): Int = {

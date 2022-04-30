@@ -29,10 +29,11 @@ public class MusicThread extends Thread {
 
 			Mixer.Info selectedMixer = null;
 
+			System.out.print("All Mixer:\n");
 			for (Mixer.Info mixerInfo : AudioSystem.getMixerInfo()) {
 				Mixer mixer = AudioSystem.getMixer(mixerInfo);
+				System.out.print(mixerInfo);
 				if (mixer.isLineSupported(lineInfo)) {
-					System.out.print(mixerInfo);
 					selectedMixer = mixerInfo;
 					break;
 				}
