@@ -17,7 +17,9 @@ object NameWindow {
           initial = ""
         )
 
-        ScoreBoard.insert(List(Game.getScore().toString(), inp.get))
+        ScoreBoard.insert(
+          List(Game.getScore().toString(), inp.get, Game.difficulty.toString())
+        )
 
         RankingWindow.open()
     }

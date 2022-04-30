@@ -7,6 +7,8 @@ import application.Game
 
 object Main extends App {
 
+    // SoundPlayer.play("AircraftWar/resources/sounds/bgm.wav")
+
     val WINDOW_WIDTH = 512
     val WINDOW_HEIGHT = 768
     var debug = false

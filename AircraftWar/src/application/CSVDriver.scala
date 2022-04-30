@@ -34,7 +34,7 @@ object CSVDriver extends DAO {
 
     def getAll(): List[List[String]] = {
         val reader = CSVReader.open(f)
-        val list = reader.all().sortWith(_(0).toInt > _(0).toInt)
+        val list = reader.all()
         reader.close()
         list
     }

@@ -25,6 +25,8 @@ import java.util.jar.Attributes.Name
 
 object Game extends JPanel {
 
+    var difficulty = 0
+
     private var backGroundTop = 0
 
     private val timeInterval = 40

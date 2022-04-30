@@ -19,6 +19,7 @@ object MenuWindow extends MainFrame {
         contents += new Button {
             text = "Moderate"
             reactions += { case ButtonClicked(_) =>
+                Game.difficulty = 1
                 gameStart()
             }
         }
@@ -26,16 +27,17 @@ object MenuWindow extends MainFrame {
         contents += new Button {
             text = "Hard"
             reactions += { case ButtonClicked(_) =>
+                Game.difficulty = 2
                 gameStart()
             }
         }
 
-        contents += new Button {
-            text = "Ranking"
-            reactions += { case ButtonClicked(_) =>
-                ranking()
-            }
-        }
+        // contents += new Button {
+        //     text = "Ranking"
+        //     reactions += { case ButtonClicked(_) =>
+        //         ranking()
+        //     }
+        // }
     }
 
     def gameStart() = {
