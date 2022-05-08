@@ -52,4 +52,8 @@ class BossEnemy(
         super.vanish()
     }
 
+    override def update(): Unit = {
+        // do nothing
+    }
+
 }

@@ -12,14 +12,17 @@ import factory.BulletFactory
 import factory.WeaponFactory
 
 import misc.typing.WeaponType.MACHINEGUN
+import item.BombSubscriber
 
-abstract class EnemyAircraft extends AbstractAircraft {
+abstract class EnemyAircraft extends AbstractAircraft with BombSubscriber {
 
     private val bullet_power = 1
 
     private val direction: Int = 1
 
     val score: Int
+
+    item.BombPublisher.subscribe(this)
 
     override def forward() = {
         super.forward()
@@ -42,9 +45,13 @@ abstract class EnemyAircraft extends AbstractAircraft {
     }
 
     override def vanish(): Unit = {
-        if (getHp() == 0) {
-            application.Game.addScore(score)
-        }
+        item.BombPublisher.unsubscribe(this)
         super.vanish()
+        application.Game.addScore(score)
     }
+
+    override def update(): Unit = {
+        vanish()
+    }
+
 }

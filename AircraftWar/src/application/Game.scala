@@ -77,50 +77,53 @@ object Game extends JPanel {
 
     def action() = {
 
-        object task extends Runnable {
-            def run() = {
+        class task extends Runnable {
+            override def run() = {
+                try {
+                    time += timeInterval
 
-                time += timeInterval
+                    if (timeCountAndNewCycleJudge()) {
+                        if (enemyAircrafts.length < enemyMaxNumber) {
+                            enemyAircrafts.addOne(
+                              enemyFactory.spawn(TRIVIAL)
+                            )
+                        }
 
-                if (timeCountAndNewCycleJudge()) {
-                    if (enemyAircrafts.length < enemyMaxNumber) {
-                        enemyAircrafts.addOne(
-                          enemyFactory.spawn(TRIVIAL)
-                        )
+                        if (Events.EliteEvent()) {
+                            enemyAircrafts.addOne(
+                              enemyFactory.spawn(ELITE)
+                            )
+                        }
+                        shootAction()
                     }
 
-                    if (Events.EliteEvent()) {
-                        enemyAircrafts.addOne(
-                          enemyFactory.spawn(ELITE)
-                        )
+                    Events.poll(Game)
+
+                    bulletsMoveAction()
+
+                    aircraftsMoveAction()
+
+                    itemsMoveAction()
+
+                    crashCheckAction()
+
+                    postProcessAction()
+
+                    repaint()
+
+                    if (heroAircraft.getHp() <= 0 && !Main.debug) {
+                        // executorService.shutdown()
+                        gameOverFlag = true
+                        System.out.println("Game Over!")
+                        MusicController.stopBGM()
+                        MusicController.gameOver()
+                        Main.frame.setVisible(false)
+                        NameWindow()
                     }
-                    shootAction()
+
+                } catch {
+                    case t: Throwable => t.printStackTrace();
                 }
-
-                Events.poll(Game)
-
-                bulletsMoveAction()
-
-                aircraftsMoveAction()
-
-                itemsMoveAction()
-
-                crashCheckAction()
-
-                postProcessAction()
-
-                repaint()
-
-                if (heroAircraft.getHp() <= 0 && !Main.debug) {
-                    executorService.shutdown()
-                    gameOverFlag = true
-                    System.out.println("Game Over!")
-                    MusicController.stopBGM()
-                    MusicController.gameOver()
-                    Main.frame.setVisible(false)
-                    NameWindow()
-                }
-
             }
         }
 
@@ -128,12 +131,13 @@ object Game extends JPanel {
 
         MusicController.playBGM()
 
-        executorService.scheduleWithFixedDelay(
-          task,
+        val pid = executorService.scheduleWithFixedDelay(
+          new task,
           timeInterval,
           timeInterval,
           TimeUnit.MILLISECONDS
         )
+        // val pid = new Thread(new task).start
 
         // executorService.scheduleWithFixedDelay(
         //   bgm,
@@ -153,7 +157,11 @@ object Game extends JPanel {
     }
 
     def hasBoss(): Boolean = {
-        enemyAircrafts.map(a => a.isInstanceOf[BossEnemy]).reduce(_ | _)
+        if (enemyAircrafts.isEmpty) {
+            false
+        } else {
+            enemyAircrafts.map(a => a.isInstanceOf[BossEnemy]).reduce(_ | _)
+        }
     }
 
     def addScore(adder: Int) = {
@@ -202,6 +210,15 @@ object Game extends JPanel {
     }
 
     private def crashCheckAction() = {
+
+        for (item <- items.clone()) {
+            if (item.isValid) {
+                if (heroAircraft.crash(item)) {
+                    item.effect(this)
+                }
+            }
+        }
+
         for (bullet <- enemyBullets) {
             if (bullet.isValid) {
                 if (heroAircraft.crash(bullet)) {
@@ -225,14 +242,6 @@ object Game extends JPanel {
                             heroAircraft.decreaseHp(Integer.MAX_VALUE)
                         }
                     }
-                }
-            }
-        }
-
-        for (item <- items) {
-            if (item.isValid) {
-                if (heroAircraft.crash(item)) {
-                    item.effect(this)
                 }
             }
         }

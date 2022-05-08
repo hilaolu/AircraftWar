@@ -19,4 +19,8 @@ class HeroBullet(
         o.decreaseHp(power)
         vanish()
     }
+
+    override def update(): Unit = {
+        // do nothing
+    }
 }
