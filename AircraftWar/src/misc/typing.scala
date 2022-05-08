@@ -12,7 +12,7 @@ object EnemyType extends Enumeration {
 
 object ItemType extends Enumeration {
     type ItemType = Value
-    val BOMB, BULLET, BLOOD = Value
+    val BOMB, BULLET, BLOOD, RANDOM = Value
 }
 
 object WeaponType extends Enumeration {

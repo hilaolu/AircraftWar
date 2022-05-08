@@ -29,13 +29,21 @@ object ItemFactory {
                   vx,
                   vy
                 )
-            case _ =>
+            case BLOOD =>
                 new BloodItem(
                   x,
                   y,
                   vx,
                   vy
                 )
+            case RANDOM =>
+                val t = scala.util.Random.nextInt().abs % 3 match {
+                    case 0 => BLOOD
+                    case 1 => BULLET
+                    case 2 => BOMB
+                }
+
+                ItemFactory.spawn(t, x, y, vx, vy)
         }
     }
 }

@@ -10,7 +10,7 @@ import weapon._
 import scala.collection.mutable.ListBuffer
 import factory.ItemFactory
 
-import scala.util.Random
+import misc.typing.ItemType.RANDOM
 
 class EliteEnemy(
     var locationX: Int,
@@ -41,14 +41,8 @@ class EliteEnemy(
     override def vanish(): Unit = {
         super.vanish()
 
-        val item_type = if (Random.between(0, 2).toInt == 1) {
-            misc.typing.ItemType.BLOOD
-        } else {
-            misc.typing.ItemType.BULLET
-        }
-
         val item = ItemFactory.spawn(
-          item_type,
+          RANDOM,
           getLocationX(),
           getLocationY()
         )

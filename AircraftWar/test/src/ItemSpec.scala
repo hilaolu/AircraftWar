@@ -52,3 +52,13 @@ class ItemEffectSpec extends AnyFlatSpec with should.Matchers {
         hero.getHp() should be(30) // may change?
     }
 }
+
+class RandomItemSpec extends AnyFlatSpec with should.Matchers {
+    "Blood" should "increase hp then vanish" in {
+        val blood = ItemFactory.spawn(
+          ItemType.RANDOM,
+          0,
+          0
+        )
+    }
+}
