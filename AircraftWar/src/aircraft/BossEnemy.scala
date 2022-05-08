@@ -20,10 +20,11 @@ class BossEnemy(
     var locationY: Int,
     var speedX: Int,
     var speedY: Int,
-    var hp: Int
+    var hp: Int,
+    var shootNum: Int = 5
 ) extends EnemyAircraft {
 
-    private val bullet_power = 2
+    private val bullet_power = 5
 
     private val direction: Int = 1
 

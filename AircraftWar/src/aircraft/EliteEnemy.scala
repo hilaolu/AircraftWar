@@ -20,7 +20,7 @@ class EliteEnemy(
     var hp: Int
 ) extends EnemyAircraft {
 
-    private val bullet_power = 2
+    private val bullet_power = 4
 
     private val direction: Int = 1
 

@@ -17,8 +17,10 @@ object NameWindow {
           initial = ""
         )
 
+        val name = inp.getOrElse("anonymous")
+
         ScoreBoard.insert(
-          List(Game.getScore().toString(), inp.get, Game.difficulty.toString())
+          List(Game.getScore().toString(), name, Game.difficulty.toString())
         )
 
         RankingWindow.open()

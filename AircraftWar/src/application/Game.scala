@@ -22,6 +22,8 @@ import aircraft.weapon.MachineGun
 import aircraft.weapon.Sniper
 import aircraft.weapon.ShotGun
 import java.util.jar.Attributes.Name
+import application.difficulty.Moderate
+import application.difficulty.Difficulty
 
 object Game extends JPanel {
 
@@ -54,6 +56,12 @@ object Game extends JPanel {
 
     private val enemyFactory = EnemyFactory
 
+    var setting: Difficulty = new Moderate
+
+    def setDifficulty(d: Difficulty) = {
+        setting = d
+    }
+
     HeroController.apply(this, heroAircraft)
 
     private final var executorService: ScheduledExecutorService =
@@ -69,9 +77,9 @@ object Game extends JPanel {
         items.addOne(item)
     }
 
-    def spawnEnemy(e: misc.typing.EnemyType.EnemyType) = {
+    def spawnBoss() = {
         enemyAircrafts.addOne(
-          enemyFactory.spawn(e)
+          EnemyFactory.spawn(BOSS, setting.bossBlood())
         )
     }
 
@@ -83,15 +91,20 @@ object Game extends JPanel {
                     time += timeInterval
 
                     if (timeCountAndNewCycleJudge()) {
-                        if (enemyAircrafts.length < enemyMaxNumber) {
+                        if (enemyAircrafts.length < setting.maxEnemy()) {
                             enemyAircrafts.addOne(
-                              enemyFactory.spawn(TRIVIAL)
+                              enemyFactory.spawn(
+                                TRIVIAL
+                              )
                             )
                         }
 
                         if (Events.EliteEvent()) {
                             enemyAircrafts.addOne(
-                              enemyFactory.spawn(ELITE)
+                              enemyFactory.spawn(
+                                ELITE,
+                                blood = setting.eliteBlood()
+                              )
                             )
                         }
                         shootAction()
@@ -112,7 +125,7 @@ object Game extends JPanel {
                     repaint()
 
                     if (heroAircraft.getHp() <= 0 && !Main.debug) {
-                        // executorService.shutdown()
+                        executorService.shutdown()
                         gameOverFlag = true
                         System.out.println("Game Over!")
                         MusicController.stopBGM()
@@ -259,12 +272,12 @@ object Game extends JPanel {
         super.paint(g)
 
         g.drawImage(
-          ImageManager.BACKGROUND_IMAGE,
+          setting.bg(),
           0,
           this.backGroundTop - Main.WINDOW_HEIGHT,
           null
         )
-        g.drawImage(ImageManager.BACKGROUND_IMAGE, 0, this.backGroundTop, null)
+        g.drawImage(setting.bg(), 0, this.backGroundTop, null)
         this.backGroundTop += 1
         if (this.backGroundTop == Main.WINDOW_HEIGHT) {
             this.backGroundTop = 0

@@ -7,7 +7,12 @@ import misc.typing.EnemyType._
 import misc.typing.EnemyType
 
 object EnemyFactory {
-    def spawn(t: EnemyType, location: (Int, Int)): AbstractAircraft = {
+    def spawn(
+        t: EnemyType,
+        location: (Int, Int),
+        blood: Int,
+        shootNum: Int
+    ): AbstractAircraft = {
         t match {
             case ELITE =>
                 new EliteEnemy(
@@ -15,7 +20,7 @@ object EnemyFactory {
                   location._2,
                   0,
                   3,
-                  20
+                  blood
                 )
             case TRIVIAL =>
                 new TrivialEnemy(
@@ -23,7 +28,7 @@ object EnemyFactory {
                   location._2,
                   0,
                   5,
-                  10
+                  blood
                 )
             case BOSS =>
                 new BossEnemy(
@@ -31,14 +36,19 @@ object EnemyFactory {
                   location._2,
                   2,
                   0,
-                  10
+                  blood,
+                  shootNum
                 )
             case _ =>
-                this.spawn(TRIVIAL, location)
+                this.spawn(TRIVIAL, location, blood, shootNum)
         }
     }
 
-    def spawn(t: EnemyType): AbstractAircraft = {
+    def spawn(
+        t: EnemyType,
+        blood: Int = 5,
+        shootNum: Int = 2
+    ): AbstractAircraft = {
         val random_location = (
           (
             Math.random() * (Main.WINDOW_WIDTH - ImageManager.MOB_ENEMY_IMAGE
@@ -46,6 +56,6 @@ object EnemyFactory {
           ).toInt * 1,
           (Math.random() * Main.WINDOW_HEIGHT * 0.2).toInt * 1
         )
-        this.spawn(t, random_location)
+        this.spawn(t, random_location, blood, shootNum)
     }
 }

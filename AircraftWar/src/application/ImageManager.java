@@ -4,6 +4,8 @@ import aircraft.*;
 import bullet.*;
 import item.*;
 
+import application.difficulty.*;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
@@ -16,6 +18,11 @@ public class ImageManager {
 	private static final Map<String, BufferedImage> CLASSNAME_IMAGE_MAP = new HashMap<>();
 
 	public static BufferedImage BACKGROUND_IMAGE;
+
+	public static BufferedImage MILD_IMAGE;
+	public static BufferedImage MODERATE_IMAGE;
+	public static BufferedImage SEVERE_IMAGE;
+
 	public static BufferedImage HERO_IMAGE;
 
 	public static BufferedImage HERO_BULLET_IMAGE;
@@ -32,7 +39,9 @@ public class ImageManager {
 	static {
 		try {
 
-			BACKGROUND_IMAGE = ImageIO.read(new FileInputStream("AircraftWar/resources/images/bg.jpg"));
+			MILD_IMAGE = ImageIO.read(new FileInputStream("AircraftWar/resources/images/bg.jpg"));
+			MODERATE_IMAGE = ImageIO.read(new FileInputStream("AircraftWar/resources/images/bg2.jpg"));
+			SEVERE_IMAGE = ImageIO.read(new FileInputStream("AircraftWar/resources/images/bg3.jpg"));
 
 			HERO_IMAGE = ImageIO.read(new FileInputStream("AircraftWar/resources/images/hero.png"));
 			HERO_BULLET_IMAGE = ImageIO.read(new FileInputStream("AircraftWar/resources/images/bullet_hero.png"));
@@ -45,6 +54,10 @@ public class ImageManager {
 			BLOOD_ITEM_IMAGE = ImageIO.read(new FileInputStream("AircraftWar/resources/images/prop_blood.png"));
 			BOMB_ITEM_IMAGE = ImageIO.read(new FileInputStream("AircraftWar/resources/images/prop_bomb.png"));
 			BULLET_ITEM_IMAGE = ImageIO.read(new FileInputStream("AircraftWar/resources/images/prop_bullet.png"));
+
+			CLASSNAME_IMAGE_MAP.put(Moderate.class.getName(), MODERATE_IMAGE);
+			CLASSNAME_IMAGE_MAP.put(Mild.class.getName(), MILD_IMAGE);
+			CLASSNAME_IMAGE_MAP.put(Severe.class.getName(), SEVERE_IMAGE);
 
 			CLASSNAME_IMAGE_MAP.put(HeroAircraft.class.getName(), HERO_IMAGE);
 

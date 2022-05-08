@@ -16,7 +16,7 @@ import item.BombSubscriber
 
 abstract class EnemyAircraft extends AbstractAircraft with BombSubscriber {
 
-    private val bullet_power = 1
+    private val bullet_power = 4
 
     private val direction: Int = 1
 
@@ -31,7 +31,8 @@ abstract class EnemyAircraft extends AbstractAircraft with BombSubscriber {
         }
     }
 
-    val bullet_factory = BulletFactory(misc.typing.AircraftType.ENEMY, 1)
+    val bullet_factory =
+        BulletFactory(misc.typing.AircraftType.ENEMY, bullet_power)
     def shoot() = {
         weapon(
           bullet_factory,

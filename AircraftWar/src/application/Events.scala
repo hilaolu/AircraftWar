@@ -4,6 +4,9 @@ import scala.util.Random
 
 import application.Game
 
+import application.Game.setting
+import factory.EnemyFactory
+
 //todo event queue
 object Events {
 
@@ -12,7 +15,8 @@ object Events {
     }
 
     def EliteEvent(): Boolean = {
-        RandomInt() % 5 == 1
+        // RandomInt() % 5 == 1
+        Random.nextDouble() < application.Game.setting.eliteFreq()
     }
 
     def RandomInt(): Int = {
@@ -23,12 +27,12 @@ object Events {
     var next_boss_checkpoint = BOSSTHRESHOLD
 
     def BossEvent(g: Game.type) = {
-        if (g.getScore() >= next_boss_checkpoint) {
+        if (setting.hasBoss && g.getScore() >= next_boss_checkpoint) {
             // spawn boss
             if (!g.hasBoss()) {
                 MusicController.stopBGM()
                 MusicController.playBossBGM()
-                g.spawnEnemy(misc.typing.EnemyType.BOSS)
+                g.spawnBoss()
             }
             next_boss_checkpoint += BOSSTHRESHOLD
         }
