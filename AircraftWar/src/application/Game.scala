@@ -24,6 +24,8 @@ import aircraft.weapon.ShotGun
 import java.util.jar.Attributes.Name
 import application.difficulty.Moderate
 import application.difficulty.Difficulty
+import application.difficulty.Mild
+import application.difficulty.Severe
 
 object Game extends JPanel {
 
@@ -344,6 +346,12 @@ object Game extends JPanel {
         val s9: Option[Sniper] = None
         val s10: Option[ShotGun] = None
         val s11: Option[DAO] = None
+        val s12: Option[Difficulty] = None
+        val s13: Option[Mild] = None
+        val s14: Option[Severe] = None
+        val s15: Option[Moderate] = None
+        val s16 = BombPublisher
+        val s17: Option[BombSubscriber] = None
         val scoreboard = ScoreBoard
         val driver = CSVDriver
     }
