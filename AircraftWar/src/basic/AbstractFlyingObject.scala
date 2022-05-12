@@ -53,6 +53,10 @@ abstract class AbstractFlyingObject {
         locationY
     }
 
+    def getLocationStr(): String = {
+        locationX.toString() + "," + locationY.toString()
+    }
+
     def setLocation(_locationX: Double, _locationY: Double) {
         locationX = _locationX.toInt
         locationY = _locationY.toInt
@@ -99,9 +103,9 @@ abstract class AbstractFlyingObject {
             true
         } else if (locationY <= 0) {
             true
+        } else {
+            false
         }
-
-        false
 
     }
 
