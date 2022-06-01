@@ -14,8 +14,9 @@ import factory.BulletFactory
 import factory.WeaponFactory
 import aircraft.weapon.ShotGun
 import application.MusicController
+import application.Agent
 
-object HeroAircraft extends AbstractAircraft {
+class HeroAircraft(agent: Agent) extends AbstractAircraft {
     var locationX: Int = Main.WINDOW_WIDTH / 2
     var locationY: Int =
         Main.WINDOW_HEIGHT - ImageManager.HERO_IMAGE.getHeight()
@@ -30,6 +31,13 @@ object HeroAircraft extends AbstractAircraft {
 
     private val direction: Int = -1
 
+    override def getLocationX() = {
+        agent.x
+    }
+
+    override def getLocationY() = {
+        agent.y
+    }
     override def forward() = {
         // null function
     }

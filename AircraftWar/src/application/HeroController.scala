@@ -7,7 +7,7 @@ import aircraft.HeroAircraft
 
 object HeroController {
 
-    def apply(game: Game.type, heroAircraft: HeroAircraft.type) = {
+    def apply(game: Game.type, heroAircraft: HeroAircraft) = {
 
         var mouseAdapter = new MouseAdapter() {
 

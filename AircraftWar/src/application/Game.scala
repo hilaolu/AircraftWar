@@ -26,6 +26,12 @@ import application.difficulty.Moderate
 import application.difficulty.Difficulty
 import application.difficulty.Mild
 import application.difficulty.Severe
+import java.net.ServerSocket
+import java.io.ObjectOutputStream
+import java.io.PrintStream
+import java.io.DataOutputStream
+import java.io.BufferedReader
+import java.io.InputStreamReader
 
 object Game extends JPanel {
 
@@ -35,7 +41,13 @@ object Game extends JPanel {
 
     private val timeInterval = 40
 
-    private val heroAircraft = HeroAircraft
+    private val agents = ListBuffer(new Agent(), new Agent())
+
+    // private val heroAircraft = HeroAircraft
+    private val heroAircrafts: ListBuffer[HeroAircraft] = new ListBuffer()
+
+    heroAircrafts.append(new HeroAircraft(agents(0)))
+    heroAircrafts.append(new HeroAircraft(agents(1)))
 
     private var enemyAircrafts: ListBuffer[AbstractAircraft] =
         new ListBuffer()
@@ -64,7 +76,7 @@ object Game extends JPanel {
         setting = d
     }
 
-    HeroController.apply(this, heroAircraft)
+    HeroController.apply(this, heroAircrafts(0))
 
     private final var executorService: ScheduledExecutorService =
         new ScheduledThreadPoolExecutor(
@@ -85,7 +97,51 @@ object Game extends JPanel {
         )
     }
 
+    def getFlyingObjectListLocations[T <: AbstractFlyingObject](
+        l: ListBuffer[T]
+    ) = {
+        l.map(a => a.getLocationStr())
+    }
+
+    def genStatusStr(): String = {
+
+        val result = ujson.Obj(
+          "hero_bullets" ->
+              getFlyingObjectListLocations(heroBullets),
+          "heroes" -> getFlyingObjectListLocations(
+            heroAircrafts
+          ),
+          "trivial_enemy" -> getFlyingObjectListLocations(
+            enemyAircrafts.filter(_.isInstanceOf[TrivialEnemy])
+          ),
+          "elite_enemy" -> getFlyingObjectListLocations(
+            enemyAircrafts.filter(_.isInstanceOf[EliteEnemy])
+          ),
+          "boss_enemy" -> getFlyingObjectListLocations(
+            enemyAircrafts.filter(_.isInstanceOf[BossEnemy])
+          ),
+          "enemy_bullets" ->
+              getFlyingObjectListLocations(enemyBullets)
+        )
+
+        ujson.write(result)
+    }
+
     def action() = {
+
+        val server_socket = new ServerSocket(11451)
+        val client_socket_0 = server_socket.accept()
+        agents(0).setConnection(client_socket_0)
+
+        val client_socket_1 = server_socket.accept()
+        agents(1).setConnection(client_socket_1)
+        // val print_output_stream = new PrintStream(
+        //   client_socket.getOutputStream()
+        // )
+
+        // val input_stream = new BufferedReader(
+        //   new InputStreamReader(client_socket.getInputStream())
+        // )
 
         class task extends Runnable {
             override def run() = {
@@ -114,6 +170,11 @@ object Game extends JPanel {
 
                     Events.poll(Game)
 
+                    for (agent <- agents) {
+                        agent.poll()
+                        agent.push()
+                    }
+
                     bulletsMoveAction()
 
                     aircraftsMoveAction()
@@ -126,7 +187,20 @@ object Game extends JPanel {
 
                     repaint()
 
-                    if (heroAircraft.getHp() <= 0 && !Main.debug) {
+                    // println(genStatusStr())
+
+                    var threshold = 0
+                    // while (!input_stream.ready() && threshold < 10) {
+                    //     threshold += 1
+                    //     Thread.sleep(10)
+                    // }
+
+                    // if (heroAircraft.getHp() <= 0 && !Main.debug) {
+                    if (
+                      heroAircrafts
+                          .map(_.isValid())
+                          .reduce(_ || _) && !Main.debug
+                    ) {
                         executorService.shutdown()
                         gameOverFlag = true
                         System.out.println("Game Over!")
@@ -164,7 +238,9 @@ object Game extends JPanel {
     }
 
     def getHero() = {
-        heroAircraft
+        // return a random hero
+        val index = scala.util.Random.nextInt(heroAircrafts.length)
+        heroAircrafts(index)
     }
 
     def getScore() = {
@@ -200,7 +276,7 @@ object Game extends JPanel {
             enemyBullets.addAll(enemyAircraft.shoot())
         }
 
-        heroBullets.addAll(heroAircraft.shoot())
+        heroBullets.addAll(heroAircrafts.map(_.shoot()).flatten)
     }
 
     private def bulletsMoveAction() = {
@@ -226,18 +302,32 @@ object Game extends JPanel {
 
     private def crashCheckAction() = {
 
-        for (item <- items.clone()) {
-            if (item.isValid) {
-                if (heroAircraft.crash(item)) {
-                    item.effect(this)
+        for (heroAircraft <- heroAircrafts) {
+            for (item <- items.clone()) {
+                if (item.isValid) {
+                    if (heroAircraft.crash(item)) {
+                        item.effect(this)
+                    }
                 }
             }
-        }
 
-        for (bullet <- enemyBullets) {
-            if (bullet.isValid) {
-                if (heroAircraft.crash(bullet)) {
-                    bullet.effect(heroAircraft)
+            for (bullet <- enemyBullets) {
+                if (bullet.isValid) {
+                    if (heroAircraft.crash(bullet)) {
+                        bullet.effect(heroAircraft)
+                    }
+                }
+            }
+
+            for (enemyAircraft <- enemyAircrafts) {
+                if (!enemyAircraft.notValid()) {
+                    if (
+                      enemyAircraft.crash(heroAircraft)
+                      || heroAircraft.crash(enemyAircraft)
+                    ) {
+                        enemyAircraft.vanish()
+                        heroAircraft.decreaseHp(Integer.MAX_VALUE)
+                    }
                 }
             }
         }
@@ -248,13 +338,6 @@ object Game extends JPanel {
                     if (!enemyAircraft.notValid()) {
                         if (enemyAircraft.crash(bullet)) {
                             bullet.effect(enemyAircraft)
-                        }
-                        if (
-                          enemyAircraft.crash(heroAircraft)
-                          || heroAircraft.crash(enemyAircraft)
-                        ) {
-                            enemyAircraft.vanish()
-                            heroAircraft.decreaseHp(Integer.MAX_VALUE)
                         }
                     }
                 }
@@ -291,12 +374,16 @@ object Game extends JPanel {
         paintImageWithPositionRevised(g, enemyAircrafts)
         paintImageWithPositionRevised(g, items)
 
-        g.drawImage(
-          ImageManager.HERO_IMAGE,
-          heroAircraft.getLocationX() - ImageManager.HERO_IMAGE.getWidth() / 2,
-          heroAircraft.getLocationY() - ImageManager.HERO_IMAGE.getHeight() / 2,
-          null
-        )
+        for (heroAircraft <- heroAircrafts) {
+            g.drawImage(
+              ImageManager.HERO_IMAGE,
+              heroAircraft
+                  .getLocationX() - ImageManager.HERO_IMAGE.getWidth() / 2,
+              heroAircraft
+                  .getLocationY() - ImageManager.HERO_IMAGE.getHeight() / 2,
+              null
+            )
+        }
 
         paintScoreAndLife(g)
 
@@ -328,32 +415,9 @@ object Game extends JPanel {
         g.setColor(new Color(16711680))
         g.setFont(new Font("SansSerif", Font.BOLD, 22))
         g.drawString("SCORE:" + this.score, x, y)
-        g.drawString("LIFE:" + this.heroAircraft.getHp(), x, y + 20)
-    }
-
-    val d = new dummy
-
-    class dummy {
-        val s0: Option[BossEnemy] = None
-        val s1: Option[EliteEnemy] = None
-        val s2: Option[TrivialEnemy] = None
-        val s3: Option[HeroBullet] = None
-        val s4: Option[EnemyBullet] = None
-        val s5: Option[BloodItem] = None
-        val s6: Option[BombItem] = None
-        val s7: Option[BulletItem] = None
-        val s8: Option[MachineGun] = None
-        val s9: Option[Sniper] = None
-        val s10: Option[ShotGun] = None
-        val s11: Option[DAO] = None
-        val s12: Option[Difficulty] = None
-        val s13: Option[Mild] = None
-        val s14: Option[Severe] = None
-        val s15: Option[Moderate] = None
-        val s16 = BombPublisher
-        val s17: Option[BombSubscriber] = None
-        val scoreboard = ScoreBoard
-        val driver = CSVDriver
+        for (heroAircraft <- heroAircrafts) {
+            g.drawString("LIFE:" + heroAircraft.getHp(), x, y + 20)
+        }
     }
 
 }

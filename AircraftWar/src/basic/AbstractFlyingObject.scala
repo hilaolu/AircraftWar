@@ -54,12 +54,17 @@ abstract class AbstractFlyingObject {
     }
 
     def getLocationStr(): String = {
-        locationX.toString() + "," + locationY.toString()
+        getLocationX().toString() + "," + getLocationY().toString()
     }
 
     def setLocation(_locationX: Double, _locationY: Double) {
         locationX = _locationX.toInt
         locationY = _locationY.toInt
+    }
+
+    def setLocation(_locationX: Int, _locationY: Int) {
+        locationX = _locationX
+        locationY = _locationY
     }
 
     def getSpeedY(): Int = {
