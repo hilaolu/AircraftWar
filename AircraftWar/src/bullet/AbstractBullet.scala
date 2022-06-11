@@ -3,18 +3,12 @@ package bullet
 import basic.AbstractFlyingObject
 import application.Main
 import aircraft.AbstractAircraft
-import item.BombSubscriber
 
 trait Effect {
     def effect[T <: AbstractAircraft](o: T)
 }
 
-abstract class AbstractBullet
-    extends AbstractFlyingObject
-    with Effect
-    with BombSubscriber {
-
-    item.BombPublisher.subscribe(this)
+abstract class AbstractBullet extends AbstractFlyingObject with Effect {
 
     var power: Int
 
@@ -48,10 +42,9 @@ abstract class AbstractBullet
 
     override def vanish(): Unit = {
         super.vanish()
-        item.BombPublisher.unsubscribe(this)
     }
 
-    override def update(): Unit = {
+    def update(): Unit = {
         vanish()
     }
 

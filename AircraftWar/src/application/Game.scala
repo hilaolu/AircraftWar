@@ -33,7 +33,21 @@ import java.io.DataOutputStream
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
-object Game extends JPanel {
+trait RoomElement {
+    var room: application.Game = null
+
+    def setRoom(room: application.Game) = {
+        this.room = room
+    }
+}
+
+class Game(agents: ListBuffer[Agent]) {
+
+    val events = new Events(this)
+
+    implicit val context = this
+
+    events.setRoom(this)
 
     var difficulty = 0
 
@@ -41,19 +55,17 @@ object Game extends JPanel {
 
     private val timeInterval = 40
 
-    private val agents = ListBuffer(new Agent(), new Agent())
-
     // private val heroAircraft = HeroAircraft
     private val heroAircrafts: ListBuffer[HeroAircraft] = new ListBuffer()
 
     heroAircrafts.append(new HeroAircraft(agents(0)))
     heroAircrafts.append(new HeroAircraft(agents(1)))
 
-    private var enemyAircrafts: ListBuffer[AbstractAircraft] =
+    var enemyAircrafts: ListBuffer[AbstractAircraft] =
         new ListBuffer()
-    private var heroBullets: ListBuffer[AbstractBullet] =
+    var heroBullets: ListBuffer[AbstractBullet] =
         new ListBuffer()
-    private var enemyBullets: ListBuffer[AbstractBullet] =
+    var enemyBullets: ListBuffer[AbstractBullet] =
         new ListBuffer()
 
     private var items: ListBuffer[AbstractItem] =
@@ -76,8 +88,6 @@ object Game extends JPanel {
         setting = d
     }
 
-    HeroController.apply(this, heroAircrafts(0))
-
     private final var executorService: ScheduledExecutorService =
         new ScheduledThreadPoolExecutor(
           1,
@@ -92,8 +102,10 @@ object Game extends JPanel {
     }
 
     def spawnBoss() = {
+        val boss = EnemyFactory.spawn(BOSS, setting.bossBlood())
+        boss.setRoom(this)
         enemyAircrafts.addOne(
-          EnemyFactory.spawn(BOSS, setting.bossBlood())
+          boss
         )
     }
 
@@ -109,7 +121,7 @@ object Game extends JPanel {
           "hero_bullets" ->
               getFlyingObjectListLocations(heroBullets),
           "heroes" -> getFlyingObjectListLocations(
-            heroAircrafts
+            heroAircrafts.filter(_.isValid())
           ),
           "trivial_enemy" -> getFlyingObjectListLocations(
             enemyAircrafts.filter(_.isInstanceOf[TrivialEnemy])
@@ -129,19 +141,8 @@ object Game extends JPanel {
 
     def action() = {
 
-        val server_socket = new ServerSocket(11451)
-        val client_socket_0 = server_socket.accept()
-        agents(0).setConnection(client_socket_0)
-
-        val client_socket_1 = server_socket.accept()
-        agents(1).setConnection(client_socket_1)
-        // val print_output_stream = new PrintStream(
-        //   client_socket.getOutputStream()
-        // )
-
-        // val input_stream = new BufferedReader(
-        //   new InputStreamReader(client_socket.getInputStream())
-        // )
+        agents(0).setRoom(this)
+        agents(1).setRoom(this)
 
         class task extends Runnable {
             override def run() = {
@@ -157,7 +158,7 @@ object Game extends JPanel {
                             )
                         }
 
-                        if (Events.EliteEvent()) {
+                        if (events.EliteEvent()) {
                             enemyAircrafts.addOne(
                               enemyFactory.spawn(
                                 ELITE,
@@ -165,15 +166,11 @@ object Game extends JPanel {
                               )
                             )
                         }
+
                         shootAction()
                     }
 
-                    Events.poll(Game)
-
-                    for (agent <- agents) {
-                        agent.poll()
-                        agent.push()
-                    }
+                    events.poll()
 
                     bulletsMoveAction()
 
@@ -185,29 +182,19 @@ object Game extends JPanel {
 
                     postProcessAction()
 
-                    repaint()
+                    for (agent <- agents) {
+                        agent.push()
+                    }
 
-                    // println(genStatusStr())
-
-                    var threshold = 0
-                    // while (!input_stream.ready() && threshold < 10) {
-                    //     threshold += 1
-                    //     Thread.sleep(10)
-                    // }
-
-                    // if (heroAircraft.getHp() <= 0 && !Main.debug) {
                     if (
-                      heroAircrafts
+                      !(heroAircrafts
                           .map(_.isValid())
-                          .reduce(_ || _) && !Main.debug
+                          .reduce(_ || _)
+                          || Main.debug)
                     ) {
                         executorService.shutdown()
                         gameOverFlag = true
                         System.out.println("Game Over!")
-                        MusicController.stopBGM()
-                        MusicController.gameOver()
-                        Main.frame.setVisible(false)
-                        NameWindow()
                     }
 
                 } catch {
@@ -216,24 +203,12 @@ object Game extends JPanel {
             }
         }
 
-        // val bgm = new MusicThread("bgm.wav")
-
-        MusicController.playBGM()
-
         val pid = executorService.scheduleWithFixedDelay(
           new task,
           timeInterval,
           timeInterval,
           TimeUnit.MILLISECONDS
         )
-        // val pid = new Thread(new task).start
-
-        // executorService.scheduleWithFixedDelay(
-        //   bgm,
-        //   timeInterval,
-        //   timeInterval,
-        //   TimeUnit.MILLISECONDS
-        // )
 
     }
 
@@ -351,62 +326,6 @@ object Game extends JPanel {
         heroBullets = heroBullets.filter(_.isValid)
         enemyAircrafts = enemyAircrafts.filter(_.isValid)
         items = items.filter(_.isValid)
-    }
-
-    override def paint(g: Graphics) = {
-        super.paint(g)
-
-        g.drawImage(
-          setting.bg(),
-          0,
-          this.backGroundTop - Main.WINDOW_HEIGHT,
-          null
-        )
-        g.drawImage(setting.bg(), 0, this.backGroundTop, null)
-        this.backGroundTop += 1
-        if (this.backGroundTop == Main.WINDOW_HEIGHT) {
-            this.backGroundTop = 0
-        }
-
-        paintImageWithPositionRevised(g, enemyBullets)
-        paintImageWithPositionRevised(g, heroBullets)
-
-        paintImageWithPositionRevised(g, enemyAircrafts)
-        paintImageWithPositionRevised(g, items)
-
-        for (heroAircraft <- heroAircrafts) {
-            g.drawImage(
-              ImageManager.HERO_IMAGE,
-              heroAircraft
-                  .getLocationX() - ImageManager.HERO_IMAGE.getWidth() / 2,
-              heroAircraft
-                  .getLocationY() - ImageManager.HERO_IMAGE.getHeight() / 2,
-              null
-            )
-        }
-
-        paintScoreAndLife(g)
-
-    }
-
-    private def paintImageWithPositionRevised[T <: AbstractFlyingObject](
-        g: Graphics,
-        objects: ListBuffer[T]
-    ): Unit = {
-        if (objects.size == 0) {
-            return
-        }
-
-        for (o <- objects) {
-            val image: BufferedImage = o.getImage()
-            // assert image != null : objects.getClass().getName() + " has no image! "
-            g.drawImage(
-              image,
-              o.getLocationX() - image.getWidth() / 2,
-              o.getLocationY() - image.getHeight() / 2,
-              null
-            )
-        }
     }
 
     private def paintScoreAndLife(g: Graphics) = {

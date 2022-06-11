@@ -6,7 +6,9 @@ import aircraft.AbstractAircraft
 import application.ImageManager
 import application.Main
 
-abstract class AbstractFlyingObject {
+import application.RoomElement
+
+abstract class AbstractFlyingObject extends RoomElement {
 
     protected var locationX: Int
     protected var locationY: Int

@@ -3,38 +3,9 @@ package item
 import basic.AbstractFlyingObject
 import application.Game
 import aircraft.AbstractAircraft
-import application.MusicController
 import scala.collection.mutable.ListBuffer
 import scala.collection.mutable.HashMap
-
-trait BombSubscriber {
-    def update()
-}
-
-object BombPublisher {
-
-    var subscribers: HashMap[AbstractFlyingObject with BombSubscriber, Unit] =
-        new HashMap()
-
-    // var subscribers: ListBuffer[AbstractFlyingObject with BombSubscriber] =
-    //     new ListBuffer()
-
-    def notifySubscriber() {
-        for (s <- subscribers.keys.toList) {
-            // for (s <- subscribers) {
-            s.update()
-        }
-    }
-
-    def subscribe(o: AbstractFlyingObject with BombSubscriber) {
-        subscribers.put(o, ())
-        // subscribers.append(o)
-    }
-
-    def unsubscribe(o: AbstractFlyingObject with BombSubscriber) {
-        subscribers.remove(o)
-    }
-}
+import aircraft.BossEnemy
 
 class BombItem(
     var locationX: Int,
@@ -43,10 +14,10 @@ class BombItem(
     var speedY: Int
 ) extends AbstractItem {
 
-    def effect(o: Game.type): Unit = {
-        MusicController.bomb()
+    def effect(o: Game): Unit = {
         println("[Bomb Item Applied]")
-        BombPublisher.notifySubscriber()
+        o.enemyAircrafts.filter(!_.isInstanceOf[BossEnemy]).map(_.vanish())
+        o.enemyBullets.map(_.vanish())
         vanish()
     }
 }

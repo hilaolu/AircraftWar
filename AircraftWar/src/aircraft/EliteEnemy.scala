@@ -46,6 +46,6 @@ class EliteEnemy(
           getLocationX(),
           getLocationY()
         )
-        application.Game.addItem(item)
+        room.addItem(item)
     }
 }

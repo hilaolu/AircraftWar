@@ -5,6 +5,7 @@ import application.Main
 import application.ImageManager
 import misc.typing.EnemyType._
 import misc.typing.EnemyType
+import application.Game
 
 object EnemyFactory {
     def spawn(
@@ -12,8 +13,8 @@ object EnemyFactory {
         location: (Int, Int),
         blood: Int,
         shootNum: Int
-    ): AbstractAircraft = {
-        t match {
+    )(implicit context: Game): AbstractAircraft = {
+        var result = t match {
             case ELITE =>
                 new EliteEnemy(
                   location._1,
@@ -42,13 +43,15 @@ object EnemyFactory {
             case _ =>
                 this.spawn(TRIVIAL, location, blood, shootNum)
         }
+        result.setRoom(context)
+        result
     }
 
     def spawn(
         t: EnemyType,
         blood: Int = 5,
         shootNum: Int = 2
-    ): AbstractAircraft = {
+    )(implicit context: Game): AbstractAircraft = {
         val random_location = (
           (
             Math.random() * (Main.WINDOW_WIDTH - ImageManager.MOB_ENEMY_IMAGE

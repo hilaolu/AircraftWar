@@ -4,8 +4,9 @@ import factory.BulletFactory
 import bullet.AbstractBullet
 
 import scala.collection.mutable.ListBuffer
+import application.RoomElement
 
-trait AbstractWeapon {
+trait AbstractWeapon extends RoomElement {
     def apply[T <: AbstractBullet](
         bullet_factory: BulletFactory,
         x: Int,

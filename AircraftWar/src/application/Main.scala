@@ -4,35 +4,29 @@ import java.awt._
 import javax.swing._
 
 import application.Game
+import scala.collection.mutable.ListBuffer
+import java.net.ServerSocket
 
 object Main extends App {
-
-    // SoundPlayer.play("AircraftWar/resources/sounds/bgm.wav")
 
     val WINDOW_WIDTH = 512
     val WINDOW_HEIGHT = 768
     var debug = false
-
-    var screenSize: Dimension = Toolkit.getDefaultToolkit().getScreenSize()
-    var frame: JFrame = new JFrame("Aircraft War")
-    frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT)
-    frame.setResizable(false)
-    frame.setBounds(
-      ((screenSize.getWidth() - WINDOW_WIDTH) / 2).toInt,
-      0,
-      WINDOW_WIDTH,
-      WINDOW_HEIGHT
-    )
-    frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE)
 
     if (args.length != 0 && args(0) == "--debug") {
         println("[DEBUG ON]")
         debug = true
     }
 
-    MenuWindow.visible = true
+    println("[Game Start]")
 
-    frame.add(Game)
-    ScoreBoard.init()
+    val server_socket = new ServerSocket(11451)
+    while (true) {
+        val client_socket = server_socket.accept()
+        val agent = new Agent()
+        agent.setConnection(client_socket)
+    }
+
+    Thread.sleep(1919810114)
 
 }

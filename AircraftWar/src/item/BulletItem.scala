@@ -8,11 +8,10 @@ import factory.WeaponFactory
 import misc.typing.WeaponType.SHOTGUN
 
 import application.{CornJob, Command}
-import application.MusicController
 
-class CancelBullet extends Command {
+class CancelBullet(context: application.Game) extends Command {
     def execute() = {
-        val hero = application.Game.getHero()
+        val hero = context.getHero()
         hero.decBulletNum()
 
     }
@@ -25,12 +24,11 @@ class BulletItem(
     var speedY: Int
 ) extends AbstractItem {
 
-    def effect(o: Game.type): Unit = {
+    def effect(o: Game): Unit = {
         // o.getHero().setWeapon(WeaponFactory.spawn(SHOTGUN))
-        MusicController.supply()
         o.getHero().setShootNum(o.getHero().getShootNum() + 1)
         o.getHero().incBulletNum()
-        application.CornJob(new CancelBullet, 2000)
+        application.CornJob(new CancelBullet(o), 2000)
         vanish()
     }
 }

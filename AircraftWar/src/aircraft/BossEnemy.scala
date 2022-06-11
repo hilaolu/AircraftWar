@@ -13,7 +13,6 @@ import scala.collection.mutable.ListBuffer
 
 import factory.BulletFactory
 import factory.WeaponFactory
-import application.MusicController
 
 class BossEnemy(
     var locationX: Int,
@@ -31,6 +30,7 @@ class BossEnemy(
     val score = 30
 
     weapon = WeaponFactory.spawn(misc.typing.WeaponType.SNIPER)
+    weapon.setRoom(room)
 
     override def shoot() = {
         weapon(
@@ -46,10 +46,8 @@ class BossEnemy(
 
     override def vanish(): Unit = {
         if (getHp() == 0) {
-            application.Game.addScore(score)
+            room.addScore(score)
         }
-        MusicController.stopBossBGM()
-        MusicController.playBGM()
         super.vanish()
     }
 

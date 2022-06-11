@@ -13,7 +13,6 @@ import application.Main
 import factory.BulletFactory
 import factory.WeaponFactory
 import aircraft.weapon.ShotGun
-import application.MusicController
 import application.Agent
 
 class HeroAircraft(agent: Agent) extends AbstractAircraft {
@@ -44,7 +43,6 @@ class HeroAircraft(agent: Agent) extends AbstractAircraft {
 
     val bullet_factory = BulletFactory(misc.typing.AircraftType.HERO, 1)
     override def shoot() = {
-        MusicController.shot()
         weapon(
           bullet_factory,
           getLocationX(),

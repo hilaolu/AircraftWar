@@ -5,7 +5,7 @@ import application.Game
 import aircraft.AbstractAircraft
 
 trait Effect {
-    def effect(o: Game.type)
+    def effect(o: Game)
 }
 
 abstract class AbstractItem extends AbstractFlyingObject with Effect {
