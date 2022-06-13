@@ -58,9 +58,6 @@ class Game(agents: ListBuffer[Agent]) {
     // private val heroAircraft = HeroAircraft
     private val heroAircrafts: ListBuffer[HeroAircraft] = new ListBuffer()
 
-    heroAircrafts.append(new HeroAircraft(agents(0)))
-    heroAircrafts.append(new HeroAircraft(agents(1)))
-
     var enemyAircrafts: ListBuffer[AbstractAircraft] =
         new ListBuffer()
     var heroBullets: ListBuffer[AbstractBullet] =
@@ -141,8 +138,10 @@ class Game(agents: ListBuffer[Agent]) {
 
     def action() = {
 
-        agents(0).setRoom(this)
-        agents(1).setRoom(this)
+        for (agent <- agents) {
+            heroAircrafts.append(new HeroAircraft(agent))
+            agent.setRoom(this)
+        }
 
         class task extends Runnable {
             override def run() = {
@@ -183,7 +182,7 @@ class Game(agents: ListBuffer[Agent]) {
                     postProcessAction()
 
                     for (agent <- agents) {
-                        agent.push()
+                        agent.push(genStatusStr())
                     }
 
                     if (
@@ -281,7 +280,7 @@ class Game(agents: ListBuffer[Agent]) {
             for (item <- items.clone()) {
                 if (item.isValid) {
                     if (heroAircraft.crash(item)) {
-                        item.effect(this)
+                        item.effect(this, heroAircraft)
                     }
                 }
             }

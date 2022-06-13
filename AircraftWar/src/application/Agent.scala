@@ -33,6 +33,8 @@ class Agent extends RoomElement {
     var pollStream: Option[BufferedReader] = None
     var pushStream: Option[PrintStream] = None
 
+    var room_id = 114514
+
     def getLocation() = {
         (x, y)
     }
@@ -43,7 +45,13 @@ class Agent extends RoomElement {
                 if (s.ready()) {
                     val loc = s.readLine().split(",").map(_.toInt)
                     if (loc.length == 1) {
-                        Lobby.join(loc(0), this)
+                        if (loc(0) == -1) {
+                            Lobby.start(room_id)
+                        } else {
+                            room_id = loc(0)
+                            val result = Lobby.join(room_id, this)
+                            push(result)
+                        }
                     } else {
                         x = loc(0)
                         y = loc(1)
@@ -56,10 +64,10 @@ class Agent extends RoomElement {
         }
     }
 
-    def push() = {
+    def push(content: String) = {
         pushStream match {
             case Some(p) => {
-                p.println(room.genStatusStr())
+                p.println(content)
                 p.flush()
             }
             case None => ()

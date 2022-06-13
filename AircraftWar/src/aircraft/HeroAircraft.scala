@@ -73,6 +73,12 @@ class HeroAircraft(agent: Agent) extends AbstractAircraft {
         }
     }
 
+    override def decreaseHp(decrease: Int): Unit = {
+        if (!Main.debug) {
+            super.decreaseHp(decrease)
+        }
+    }
+
     override def getWidth(): Int = ImageManager.HERO_IMAGE.getWidth()
 
     override def getHeight(): Int = ImageManager.HERO_IMAGE.getHeight()

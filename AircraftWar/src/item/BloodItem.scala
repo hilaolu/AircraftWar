@@ -3,6 +3,7 @@ package item
 import basic.AbstractFlyingObject
 import application.Game
 import aircraft.AbstractAircraft
+import aircraft.HeroAircraft
 
 class BloodItem(
     var locationX: Int,
@@ -11,8 +12,8 @@ class BloodItem(
     var speedY: Int
 ) extends AbstractItem {
 
-    def effect(o: Game): Unit = {
-        o.getHero.increaseHp(30)
+    def effect(o: Game, h: HeroAircraft): Unit = {
+        h.increaseHp(30)
         vanish()
     }
 
