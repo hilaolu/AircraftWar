@@ -40,11 +40,10 @@ abstract class AbstractFlyingObject extends RoomElement {
         val fWidth: Int = flyingObject.getWidth()
         val fHeight: Int = flyingObject.getHeight()
 
-        x + (fWidth + this
-            .getWidth()) / 2 > locationX && x - (fWidth + this
-            .getWidth()) / 2 < locationX && y + (fHeight / fFactor + this
-            .getHeight() / factor) / 2 > locationY && y - (fHeight / fFactor + this
-            .getHeight() / factor) / 2 < locationY
+        x + (fWidth + this.getWidth()) / 2 > locationX &&
+        x - (fWidth + this.getWidth()) / 2 < locationX &&
+        y + (fHeight / fFactor + this.getHeight() / factor) / 2 > locationY &&
+        y - (fHeight / fFactor + this.getHeight() / factor) / 2 < locationY
     }
 
     def getLocationX(): Int = {

@@ -56,7 +56,8 @@ class Game(agents: ListBuffer[Agent]) {
     private val timeInterval = 40
 
     // private val heroAircraft = HeroAircraft
-    private val heroAircrafts: ListBuffer[HeroAircraft] = new ListBuffer()
+    var heroAircrafts: ListBuffer[HeroAircraft] =
+        agents.map(agent => new HeroAircraft(agent))
 
     var enemyAircrafts: ListBuffer[AbstractAircraft] =
         new ListBuffer()
@@ -139,7 +140,6 @@ class Game(agents: ListBuffer[Agent]) {
     def action() = {
 
         for (agent <- agents) {
-            heroAircrafts.append(new HeroAircraft(agent))
             agent.setRoom(this)
         }
 
@@ -274,12 +274,16 @@ class Game(agents: ListBuffer[Agent]) {
         }
     }
 
+    private def test(): Int = {
+        1
+    }
+
     private def crashCheckAction() = {
 
         for (heroAircraft <- heroAircrafts) {
             for (item <- items.clone()) {
                 if (item.isValid) {
-                    if (heroAircraft.crash(item)) {
+                    if (item.crash(heroAircraft)) {
                         item.effect(this, heroAircraft)
                     }
                 }
@@ -287,7 +291,7 @@ class Game(agents: ListBuffer[Agent]) {
 
             for (bullet <- enemyBullets) {
                 if (bullet.isValid) {
-                    if (heroAircraft.crash(bullet)) {
+                    if (bullet.crash(heroAircraft)) {
                         bullet.effect(heroAircraft)
                     }
                 }

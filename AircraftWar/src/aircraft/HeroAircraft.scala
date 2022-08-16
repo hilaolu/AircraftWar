@@ -79,9 +79,9 @@ class HeroAircraft(agent: Agent) extends AbstractAircraft {
         }
     }
 
-    override def getWidth(): Int = ImageManager.HERO_IMAGE.getWidth()
+    // override def getWidth(): Int = ImageManager.HERO_IMAGE.getWidth()
 
-    override def getHeight(): Int = ImageManager.HERO_IMAGE.getHeight()
+    // override def getHeight(): Int = ImageManager.HERO_IMAGE.getHeight()
 
     // override def crash(o: AbstractFlyingObject): Boolean = false
 }
